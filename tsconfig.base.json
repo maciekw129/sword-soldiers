@@ -14,7 +14,10 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@ui/components": ["libs/ui/src/lib/ui/components/index.ts"],
+      "@ui/controls": ["libs/ui/src/lib/ui/controls/index.ts"],
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
