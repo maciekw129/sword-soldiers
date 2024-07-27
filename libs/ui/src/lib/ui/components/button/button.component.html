@@ -1,0 +1,15 @@
+@if (design(); as design) {
+<p-button
+  class="button"
+  [type]="type()"
+  [label]="label()"
+  [icon]="icon()"
+  [loading]="isLoading()"
+  [rounded]="design === 'rounded'"
+  [text]="design === 'text'"
+  [outlined]="design === 'outlined'"
+  [link]="design === 'link'"
+  [disabled]="disabled()"
+  (onClick)="onClick.emit()"
+/>
+}

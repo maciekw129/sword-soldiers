@@ -1,0 +1,10 @@
+@use './utils';
+
+$levels: 1 !default;
+$multiplier: 1 !default;
+
+@mixin initialize-spacing() {
+  @for $i from 1 through $levels {
+    #{"--space-" + $i}: #{($multiplier * $i) + 'px'};
+  }
+}

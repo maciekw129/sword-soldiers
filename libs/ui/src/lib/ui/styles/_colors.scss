@@ -1,0 +1,17 @@
+$palettes: (
+  primary: (),
+  secondary: (),
+  gray: ()
+);
+
+$error: #c61a09;
+
+@mixin initialize-palettes() {
+  --error-color: #{$error};
+
+  @each $name, $palette in $palettes {
+    @each $key, $value in $palette {
+      #{"--" + $name + "-color-" + $key}: #{$value};
+    }
+  }
+}

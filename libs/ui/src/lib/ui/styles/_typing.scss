@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Tiny5&display=swap');
+
+$levels: 1 !default;
+$multiplier: 0.25;
+
+$tiny5: "Tiny5", sans-serif;
+
+@mixin initialize-font-sizes() {
+  @for $i from 1 through $levels {
+    #{"--font-size-" + $i}: #{($multiplier * ($i + 2)) + 'rem'};
+  }
+}
