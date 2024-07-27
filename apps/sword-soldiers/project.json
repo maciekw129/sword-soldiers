@@ -22,7 +22,13 @@
             "input": "apps/sword-soldiers/public"
           }
         ],
-        "styles": ["apps/sword-soldiers/src/styles.scss"],
+        "styles": [
+          "apps/sword-soldiers/src/styles.scss",
+          "node_modules/normalize.css/normalize.css",
+          "node_modules/primeng/resources/themes/viva-dark/theme.css",
+          "node_modules/primeng/resources/primeng.min.css",
+          "node_modules/primeicons/primeicons.css"
+        ],
         "scripts": []
       },
       "configurations": {
