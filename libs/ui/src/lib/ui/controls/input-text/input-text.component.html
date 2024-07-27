@@ -1,0 +1,13 @@
+<div class="input-text">
+  <label class="input-text__label" [for]="controlId">{{ label() }}</label>
+  <input
+    pInputText
+    [type]="type()"
+    [readOnly]="readOnly()"
+    [id]="controlId"
+    [formControl]="formControl"
+    [placeholder]="placeholder()"
+    [validationErrorsContent]="validationErrorsContent()"
+  />
+  <small>{{ note() }}</small>
+</div>
