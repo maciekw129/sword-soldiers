@@ -17,6 +17,10 @@
     "paths": {
       "@ui/components": ["libs/ui/src/lib/ui/components/index.ts"],
       "@ui/controls": ["libs/ui/src/lib/ui/controls/index.ts"],
+      "@utils/abstracts": ["libs/utils/src/lib/utils/abstracts/index.ts"],
+      "@utils/functions": ["libs/utils/src/lib/utils/functions/index.ts"],
+      "@utils/services": ["libs/utils/src/lib/utils/services/index.ts"],
+      "@utils/types": ["libs/utils/src/lib/utils/types/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
