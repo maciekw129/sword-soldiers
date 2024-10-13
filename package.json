@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "nx serve sword-soldiers --proxy-config=proxy-dev.conf.json"
+    "start:dev": "nx serve sword-soldiers --proxy-config=proxy-dev.conf.json"
   },
   "private": true,
   "dependencies": {
@@ -18,6 +18,7 @@
     "@auth0/auth0-angular": "^2.2.3",
     "@ngrx/signals": "^18.0.0-beta.1",
     "@nx/angular": "19.3.0",
+    "jwt-decode": "^4.0.0",
     "normalize.css": "^8.0.1",
     "phaser": "^3.80.1",
     "primeicons": "^7.0.0",
@@ -36,6 +37,7 @@
     "@angular/cli": "~18.0.0",
     "@angular/compiler-cli": "~18.0.0",
     "@angular/language-service": "~18.0.0",
+    "@ngx-env/builder": "^18.0.1",
     "@nx/cypress": "19.3.0",
     "@nx/eslint": "19.3.0",
     "@nx/eslint-plugin": "19.3.0",

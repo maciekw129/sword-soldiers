@@ -1,0 +1,22 @@
+<div
+  class="sidebar-menu__wrapper main-container"
+  [ngClass]="{
+    'sidebar-menu__wrapper--left': position() === 'left',
+    'sidebar-menu__wrapper--right': position() === 'right'
+  }"
+>
+  <nav [class]="'sidebar-menu'">
+    @for (item of items(); track item.link) {
+      @if(!item.enabled || item.enabled()) {
+        <ui-button
+          class="sidebar-menu__button"
+          [icon]="item.icon"
+          [routerLink]="item.link"
+          (onClick)="item.action ? item.action() : null"
+          [design]="item.design ?? 'text'"
+          [pTooltip]="item.text"
+        />
+      }
+    }
+  </nav>
+</div>

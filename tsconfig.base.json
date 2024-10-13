@@ -15,6 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@data-access": ["libs/data-access/index.ts"],
+      "@data-access/users": ["libs/data-access/src/lib/users/index.ts"],
       "@ui/components": ["libs/ui/src/lib/ui/components/index.ts"],
       "@ui/controls": ["libs/ui/src/lib/ui/controls/index.ts"],
       "@utils/abstracts": ["libs/utils/src/lib/utils/abstracts/index.ts"],

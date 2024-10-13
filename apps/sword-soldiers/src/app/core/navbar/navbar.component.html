@@ -1,0 +1,14 @@
+<header class="navbar main-container">
+  <a class="navbar__logo" routerLink="">
+    <img class="navbar__icon" src="favicon.ico" alt="logo" />
+    <h2 class="navbar__title">Sword Soldiers</h2>
+  </a>
+  <div class="navbar__buttons">
+    @if (isAuthenticated$ | async) {
+    <p>Hello {{ user()?.name }}, let's </p>
+    <ui-button label="Play!" routerLink="/play" />
+    } @else {
+    <ui-button label="Login" design="link" (click)="redirectToLogin()" />
+    }
+  </div>
+</header>
