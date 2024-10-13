@@ -1,1 +1,28 @@
-/* You can add global styles to this file, and also import other style files */
+@use '../../../libs/ui/src/lib/ui/styles/spacing' with (
+  $levels: 7,
+  $multiplier: 4
+);
+@use '../../../libs/ui/src/lib/ui/styles/typing' with (
+  $levels: 5,
+);
+@use '../../../libs/ui/src/lib/ui/styles/flex';
+
+:root {
+  @include spacing.initialize-spacing();
+  @include typing.initialize-font-sizes();
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.main-container {
+  max-width: 1050px;
+  margin: 0 auto;
+  padding: 0 var(--space-4);
+}
+
+.gray-border {
+  border: 1px solid gray;
+  border-radius: 5px;
+}
