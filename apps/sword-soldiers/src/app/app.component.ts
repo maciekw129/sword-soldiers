@@ -8,6 +8,4 @@ import { ShellComponent } from './core/shell/shell.component';
   selector: 's-root',
   templateUrl: './app.component.html',
 })
-export class AppComponent {
-  title = 'sword-soldiers';
-}
+export class AppComponent {}
