@@ -10,6 +10,8 @@
 :root {
   @include spacing.initialize-spacing();
   @include typing.initialize-font-sizes();
+
+  --max-content-width: 1050px;
 }
 
 * {
@@ -17,7 +19,7 @@
 }
 
 .main-container {
-  max-width: 1050px;
+  max-width: var(--max-content-width);
   margin: 0 auto;
   padding: 0 var(--space-4);
 }

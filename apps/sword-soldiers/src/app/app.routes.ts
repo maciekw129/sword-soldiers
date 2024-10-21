@@ -22,6 +22,9 @@ export const appRoutes: Route[] = [
       },
       {
         path: 'user-profile',
+        data: {
+          breadcrumb: 'User profile',
+        },
         canActivate: [authGuardFn],
         loadComponent: () =>
           import('./modules/user-profile/user-profile.component').then(
@@ -30,6 +33,9 @@ export const appRoutes: Route[] = [
       },
       {
         path: 'play',
+        data: {
+          breadcrumb: 'Play',
+        },
         canActivate: [authGuardFn],
         loadComponent: () =>
           import('./modules/game/game.component').then((c) => c.GameComponent),
