@@ -36,7 +36,6 @@ export class UserProfileComponent
 
   override ngOnInit() {
     super.ngOnInit();
-    this.authService.user$.subscribe(console.log);
   }
 
   public readonly genderLabels = genderLabels;

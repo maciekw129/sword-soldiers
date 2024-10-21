@@ -29,7 +29,7 @@
         "styles": [
           "apps/sword-soldiers/src/styles.scss",
           "node_modules/normalize.css/normalize.css",
-          "node_modules/primeng/resources/themes/viva-dark/theme.css",
+          "apps/sword-soldiers/public/styles/theme.css",
           "node_modules/primeng/resources/primeng.min.css",
           "node_modules/primeicons/primeicons.css"
         ],
