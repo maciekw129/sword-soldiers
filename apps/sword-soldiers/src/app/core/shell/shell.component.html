@@ -1,9 +1,11 @@
-<s-navbar />
+<div class="main-container">
+  <s-navbar />
+  <s-breadcrumbs/>
 
+  <main>
+    <ng-content />
+  </main>
+</div>
 <ui-sidebar-menu [items]="menuItems()"/>
-
-<main>
-  <ng-content />
-</main>
 
 <p-toast position="top-center" />

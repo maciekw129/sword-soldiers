@@ -11,13 +11,19 @@ import { SidebarMenuComponent, SidebarMenuItem } from '@ui/components';
 import { PrimeIcons } from 'primeng/api';
 import { AuthService } from '@auth0/auth0-angular';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { BreadcrumbsComponent } from '../breadcrumbs/breadcrumbs.component';
 
 @Component({
   selector: 's-shell',
   standalone: true,
   templateUrl: 'shell.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [NavbarComponent, ToastModule, SidebarMenuComponent],
+  imports: [
+    NavbarComponent,
+    ToastModule,
+    SidebarMenuComponent,
+    BreadcrumbsComponent,
+  ],
 })
 export class ShellComponent {
   private readonly authService = inject(AuthService);
