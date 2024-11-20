@@ -1,10 +1,10 @@
 import { Scene } from 'phaser';
 import CursorKeys = Phaser.Types.Input.Keyboard.CursorKeys;
-import Sprite = Phaser.Physics.Arcade.Sprite;
 import { createPlayerAnims } from '../../anims/player-anims';
 import Tween = Phaser.Tweens.Tween;
+import { BaseEntity } from '../base-entity';
 
-export class Player extends Sprite {
+export class Player extends BaseEntity {
   private readonly SPEED = 100;
   private readonly cursors: CursorKeys;
   private weaponTween: Tween;
@@ -15,22 +15,16 @@ export class Player extends Sprite {
 
     this.cursors = this.scene.input.keyboard.createCursorKeys();
 
-    this.init();
-    this.initEvents();
     this.initAnims();
+    this.initEvents();
   }
 
-  private init(): void {
-    this.scene.add.existing(this);
-    this.scene.physics.add.existing(this);
+  protected override init(): void {
     this.setOffset(0, 10).setBodySize(this.width, 16, false);
-
     this.scene.cameras.main.startFollow(this, true);
-    this.setCollideWorldBounds(true);
   }
 
   private initEvents(): void {
-    this.scene.events.on(Phaser.Scenes.Events.UPDATE, this.onUpdate, this);
     this.scene.input.on('pointerdown', () => this.attack(), this);
   }
 
@@ -39,7 +33,7 @@ export class Player extends Sprite {
     this.play('idle', true);
   }
 
-  private onUpdate(): void {
+  protected override onUpdate(): void {
     this.createMovement();
   }
 

@@ -1,6 +1,6 @@
-export const createPlayerAnims = (
-  anims: Phaser.Animations.AnimationManager
-) => {
+import AnimationManager = Phaser.Animations.AnimationManager;
+
+export const createPlayerAnims = (anims: AnimationManager): void => {
   anims.create({
     key: 'idle',
     frames: anims.generateFrameNumbers('player', {
