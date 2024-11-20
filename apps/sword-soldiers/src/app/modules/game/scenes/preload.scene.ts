@@ -1,4 +1,7 @@
-import { playerSpriteMap, playerSpriteUrls } from '../player/player.const';
+import {
+  playerSpriteMap,
+  playerSpriteUrls,
+} from '../entities/player/player.const';
 import { ContextScene } from './context.scene';
 import { GameService } from '../game.service';
 

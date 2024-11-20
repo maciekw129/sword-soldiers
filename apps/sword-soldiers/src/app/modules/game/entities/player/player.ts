@@ -1,7 +1,7 @@
 import { Scene } from 'phaser';
 import CursorKeys = Phaser.Types.Input.Keyboard.CursorKeys;
 import Sprite = Phaser.Physics.Arcade.Sprite;
-import { createPlayerAnims } from '../anims/player-anims';
+import { createPlayerAnims } from '../../anims/player-anims';
 import Tween = Phaser.Tweens.Tween;
 
 export class Player extends Sprite {
