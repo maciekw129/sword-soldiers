@@ -4,10 +4,11 @@ import {
 } from '../entities/player/player.const';
 import { ContextScene } from './context.scene';
 import { GameService } from '../game.service';
+import GameConfig = Phaser.Types.Core.GameConfig;
 
 export class PreloadScene extends ContextScene<GameService> {
-  constructor(context: GameService) {
-    super('PreloadScene', context);
+  constructor(gameConfig: GameConfig, context: GameService) {
+    super('PreloadScene', gameConfig, context);
   }
 
   private preload(): void {

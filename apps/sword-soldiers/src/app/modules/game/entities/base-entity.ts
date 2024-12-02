@@ -3,12 +3,7 @@ import { Scene } from 'phaser';
 import Texture = Phaser.Textures.Texture;
 
 export abstract class BaseEntity extends Sprite {
-  protected constructor(
-    scene: Scene,
-    x: number,
-    y: number,
-    texture: string | Texture
-  ) {
+  constructor(scene: Scene, x: number, y: number, texture: string | Texture) {
     super(scene, x, y, texture);
 
     this.scene.add.existing(this);

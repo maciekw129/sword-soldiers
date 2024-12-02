@@ -5,4 +5,5 @@ export interface MapLayers {
   ground: TilemapLayer;
   walls: TilemapLayer;
   playerZones: ObjectLayer;
+  enemyZones: ObjectLayer;
 }

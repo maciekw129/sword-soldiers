@@ -1,10 +1,11 @@
 import { Scene } from 'phaser';
 import CursorKeys = Phaser.Types.Input.Keyboard.CursorKeys;
-import { createPlayerAnims } from '../../anims/player-anims';
+import { createPlayerAnims } from './player.anims';
 import Tween = Phaser.Tweens.Tween;
 import { BaseEntity } from '../base-entity';
+import { Collidible } from '../../mixins/collidible.mixin';
 
-export class Player extends BaseEntity {
+export class Player extends Collidible(BaseEntity) {
   private readonly SPEED = 100;
   private readonly cursors: CursorKeys;
   private weaponTween: Tween;
