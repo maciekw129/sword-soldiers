@@ -16,17 +16,19 @@ export class GameScene extends ContextScene<null> {
 
   protected create(): void {
     this.mapLayers = this.createMap();
+
     this.player = this.createPlayer(
       this.findSpawnZone(this.mapLayers.playerZones)
     );
-
-    this.player.addCollider(this, this.mapLayers.walls);
 
     const demon = this.createDemon(
       this.findSpawnZone(this.mapLayers.enemyZones)
     );
 
     this.player.addCollider(this, demon);
+    this.player.addCollider(this, this.mapLayers.walls);
+
+    this.setFollowUpCamera(this.player);
   }
 
   private createMap(): MapLayers {
@@ -40,6 +42,11 @@ export class GameScene extends ContextScene<null> {
     walls.setCollisionByProperty({ collides: true });
 
     return { ground, walls, playerZones, enemyZones };
+  }
+
+  private setFollowUpCamera(player: Player): void {
+    this.cameras.main.setZoom(2.25);
+    this.cameras.main.startFollow(player, true);
   }
 
   private createPlayer({ x, y }: TiledObject): Player {

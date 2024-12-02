@@ -4,6 +4,8 @@ import {
   OnDestroy,
   OnInit,
   inject,
+  viewChild,
+  ElementRef,
 } from '@angular/core';
 import Phaser, { AUTO, Game } from 'phaser';
 import { GameScene } from './scenes/game-scene/game.scene';
@@ -12,13 +14,16 @@ import { GameService } from './game.service';
 
 @Component({
   standalone: true,
-  template: '<div class="main-container" id="game-container"></div>',
-  styles: ':host {display: grid}',
+  templateUrl: 'game.component.html',
+  styleUrl: 'game.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [GameService],
 })
 export class GameComponent implements OnInit, OnDestroy {
   private readonly gameService = inject(GameService);
+
+  private readonly gameContainer =
+    viewChild.required<ElementRef<HTMLDivElement>>('gameContainer');
 
   private readonly WIDTH = document.body.offsetWidth;
   private readonly HEIGHT = 500;
@@ -28,6 +33,7 @@ export class GameComponent implements OnInit, OnDestroy {
     type: AUTO,
     width: this.WIDTH,
     height: this.HEIGHT,
+
     physics: {
       default: 'arcade',
       arcade: {
@@ -43,11 +49,6 @@ export class GameComponent implements OnInit, OnDestroy {
     backgroundColor: '#3b3b3b',
     canvasStyle: `display: block; width: 100%; height: 100%;`,
     autoFocus: true,
-    scale: {
-      width: 500,
-      height: 250,
-      zoom: 2,
-    },
   };
 
   private game!: Phaser.Game;
@@ -55,6 +56,7 @@ export class GameComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
     this.game = new Game({
       ...this.config,
+      width: this.gameContainer().nativeElement.offsetWidth,
       scene: [
         new PreloadScene(this.config, this.gameService),
         new GameScene(this.config),

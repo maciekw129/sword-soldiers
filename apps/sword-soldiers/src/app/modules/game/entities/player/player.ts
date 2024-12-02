@@ -1,15 +1,12 @@
-import { Scene } from 'phaser';
 import CursorKeys = Phaser.Types.Input.Keyboard.CursorKeys;
 import { createPlayerAnims } from './player.anims';
-import Tween = Phaser.Tweens.Tween;
 import { BaseEntity } from '../base-entity';
 import { Collidible } from '../../mixins/collidible.mixin';
+import { Scene } from 'phaser';
 
 export class Player extends Collidible(BaseEntity) {
   private readonly SPEED = 100;
   private readonly cursors: CursorKeys;
-  private weaponTween: Tween;
-  private weapon: Phaser.GameObjects.Sprite;
 
   constructor(scene: Scene, x: number, y: number) {
     super(scene, x, y, 'player');
@@ -22,7 +19,6 @@ export class Player extends Collidible(BaseEntity) {
 
   protected override init(): void {
     this.setOffset(0, 10).setBodySize(this.width, 16, false);
-    this.scene.cameras.main.startFollow(this, true);
   }
 
   private initEvents(): void {
@@ -36,6 +32,8 @@ export class Player extends Collidible(BaseEntity) {
 
   protected override onUpdate(): void {
     this.createMovement();
+
+    this.flipX = this.isCursorOnRight();
   }
 
   private createMovement(): void {
@@ -63,31 +61,11 @@ export class Player extends Collidible(BaseEntity) {
     this.playAfterRepeat('idle', 0);
   }
 
-  private attack(): void {
-    const isCursorOnRight = this.isCursorOnRight();
-
-    if (this.weaponTween?.isPlaying()) {
-      return;
-    }
-
-    this.weapon = this.scene.physics.add
-      .sprite(this.x, this.y, 'sword')
-      .setFlipX(isCursorOnRight)
-      .setOrigin(0.5, 1);
-
-    this.weapon.setInteractive();
-
-    this.weaponTween = this.scene.add.tween({
-      targets: this.weapon,
-      duration: 200,
-      angle: this.isCursorOnRight() ? '-=190' : '+=190',
-      onComplete: () => {
-        this.weapon.destroy();
-      },
-    });
-  }
+  private attack(): void {}
 
   private isCursorOnRight(): boolean {
-    return this.scene.input.mousePointer.x < 250;
+    return (
+      this.scene.input.mousePointer.x < Number(this.scene.game.config.width) / 2
+    );
   }
 }
