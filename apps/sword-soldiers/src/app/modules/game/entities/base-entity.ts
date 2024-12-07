@@ -1,9 +1,16 @@
 import Sprite = Phaser.Physics.Arcade.Sprite;
 import { Scene } from 'phaser';
 import Texture = Phaser.Textures.Texture;
+import ArcadeColliderType = Phaser.Types.Physics.Arcade.ArcadeColliderType;
 
 export abstract class BaseEntity extends Sprite {
-  constructor(scene: Scene, x: number, y: number, texture: string | Texture) {
+  constructor(
+    scene: Scene,
+    x: number,
+    y: number,
+    texture: string | Texture,
+    colliders: ArcadeColliderType[] = []
+  ) {
     super(scene, x, y, texture);
 
     this.scene.add.existing(this);
@@ -12,6 +19,7 @@ export abstract class BaseEntity extends Sprite {
 
     this.init();
     this.initUpdateEvent();
+    this.initColliders(colliders);
   }
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -22,5 +30,11 @@ export abstract class BaseEntity extends Sprite {
 
   private initUpdateEvent(): void {
     this.scene.events.on(Phaser.Scenes.Events.UPDATE, this.onUpdate, this);
+  }
+
+  private initColliders(colliders: ArcadeColliderType[]): void {
+    colliders.forEach((collider) =>
+      this.scene.physics.add.collider(this, collider)
+    );
   }
 }

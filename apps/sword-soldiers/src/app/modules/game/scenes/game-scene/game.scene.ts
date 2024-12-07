@@ -2,12 +2,15 @@ import { Player } from '../../entities/player/player';
 import { MapLayers } from './game.model';
 import ObjectLayer = Phaser.Tilemaps.ObjectLayer;
 import TiledObject = Phaser.Types.Tilemaps.TiledObject;
-import { Demon } from '../../entities/enemies/demon/demon';
 import { ContextScene } from '../context.scene';
 import GameConfig = Phaser.Types.Core.GameConfig;
+import { Enemies } from '../../groups/enemies/enemies';
+import { enemyTypes } from '../../entities/enemies/enemy.const';
+import { Enemy } from '../../entities/enemies/enemy';
 
 export class GameScene extends ContextScene<null> {
   private player: Player;
+  private enemies: Enemies;
   private mapLayers: MapLayers;
 
   constructor(gameConfig: GameConfig) {
@@ -21,13 +24,9 @@ export class GameScene extends ContextScene<null> {
       this.findSpawnZone(this.mapLayers.playerZones)
     );
 
-    const demon = this.createDemon(
-      this.findSpawnZone(this.mapLayers.enemyZones)
-    );
+    this.enemies = this.createEnemies(this.mapLayers.enemyZones);
 
-    this.player.addCollider(this, demon);
-    this.player.addCollider(this, this.mapLayers.walls);
-
+    this.createColliders();
     this.setFollowUpCamera(this.player);
   }
 
@@ -44,20 +43,46 @@ export class GameScene extends ContextScene<null> {
     return { ground, walls, playerZones, enemyZones };
   }
 
+  private createPlayer({ x, y }: TiledObject): Player {
+    return new Player(this, x, y);
+  }
+
   private setFollowUpCamera(player: Player): void {
     this.cameras.main.setZoom(2.25);
     this.cameras.main.startFollow(player, true);
-  }
-
-  private createPlayer({ x, y }: TiledObject): Player {
-    return new Player(this, x, y);
   }
 
   private findSpawnZone({ objects }: ObjectLayer): TiledObject {
     return objects.find(({ name }) => name === 'spawn');
   }
 
-  private createDemon({ x, y }: TiledObject): Demon {
-    return new Demon(this, x, y);
+  private createEnemies(enemyZones: ObjectLayer, quantity = 0): Enemies {
+    const enemies = new Enemies(this);
+
+    enemyZones.objects.forEach(({ type, x, y }) => {
+      this.time.addEvent({
+        delay: 2000,
+        callback: () => {
+          const enemy = new enemyTypes[type](this, x, y);
+          enemies.add(enemy);
+        },
+        repeat: quantity,
+      });
+    });
+
+    return enemies;
+  }
+
+  private createColliders(): void {
+    this.physics.add.collider(this.player, this.mapLayers.walls);
+    this.physics.add.collider(this.enemies, this.mapLayers.walls);
+    this.physics.add.collider(this.enemies, this.enemies);
+
+    this.physics.add.collider(
+      this.enemies,
+      this.player,
+      (enemy) => this.player.takeDamage(enemy as Enemy),
+      null
+    );
   }
 }

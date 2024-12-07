@@ -1,11 +1,14 @@
 import { Enemy } from '../enemy';
 import { Scene } from 'phaser';
 import { createDemonAnims } from './demon.anims';
-import { Collidible } from '../../../mixins/collidible.mixin';
+import { BaseEntity } from '../../base-entity';
 
-export class Demon extends Collidible(Enemy) {
-  constructor(scene: Scene, x: number, y: number) {
-    super(scene, x, y, 'demon');
+export class Demon extends Enemy {
+  public readonly SPEED = Phaser.Math.Between(30, 40);
+  public readonly ATTACK = 10;
+
+  constructor(scene: Scene, x: number, y: number, moveTo: BaseEntity) {
+    super(scene, x, y, 'demon', moveTo);
 
     this.initAnims();
   }

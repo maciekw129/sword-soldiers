@@ -81,7 +81,7 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":240,
+                 "x":112,
                  "y":128
                 }],
          "opacity":1,
@@ -91,6 +91,7 @@
          "y":0
         }, 
         {
+         "class":"Demon",
          "draworder":"topdown",
          "id":4,
          "name":"enemy_zones",
@@ -104,8 +105,8 @@
                  "type":"Demon",
                  "visible":true,
                  "width":0,
-                 "x":80,
-                 "y":64
+                 "x":368,
+                 "y":96
                 }],
          "opacity":1,
          "type":"objectgroup",
