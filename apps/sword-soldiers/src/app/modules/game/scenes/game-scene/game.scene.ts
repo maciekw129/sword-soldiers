@@ -63,7 +63,7 @@ export class GameScene extends ContextScene<null> {
       this.time.addEvent({
         delay: 2000,
         callback: () => {
-          const enemy = new enemyTypes[type](this, x, y);
+          const enemy = new enemyTypes[type](this, x, y, this.player);
           enemies.add(enemy);
         },
         repeat: quantity,

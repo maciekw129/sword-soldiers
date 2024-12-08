@@ -29,7 +29,7 @@ export class Player extends BaseEntity {
   }
 
   protected override init(): void {
-    this.setOffset(0, 10).setBodySize(this.width, 16, false);
+    this.setOffset(3, 10).setBodySize(10, 16, false);
   }
 
   private initEvents(): void {
