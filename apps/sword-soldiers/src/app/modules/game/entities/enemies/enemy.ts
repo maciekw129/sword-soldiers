@@ -10,7 +10,7 @@ export abstract class Enemy extends BaseEntity {
   private readonly moveTo: BaseEntity;
   private readonly healthBar: HealthBar;
 
-  protected readonly health: number;
+  protected health: number;
 
   constructor(
     scene: Scene,
@@ -31,10 +31,24 @@ export abstract class Enemy extends BaseEntity {
   }
 
   protected override onUpdate() {
-    if (this.moveTo) {
+    if (this.moveTo && this.scene) {
       this.scene.physics.moveToObject(this, this.moveTo, this.SPEED);
     }
 
     this.healthBar.setPosition(this.x, this.y);
+  }
+
+  public takeDamage(value: number): void {
+    this.health -= value;
+    this.healthBar.decreaseHealth(value);
+
+    if (this.health <= 0) {
+      this.destroyEnemy();
+    }
+  }
+
+  public destroyEnemy(): void {
+    this.healthBar.destroy();
+    this.destroy();
   }
 }

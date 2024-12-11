@@ -5,13 +5,26 @@ import { Scene } from 'phaser';
 import { Enemy } from '../enemies/enemy';
 import ArcadeColliderType = Phaser.Types.Physics.Arcade.ArcadeColliderType;
 import ArcadeBodyCollision = Phaser.Types.Physics.Arcade.ArcadeBodyCollision;
+import { Melee } from '../../weapons/melee/melee';
+import { Sword } from '../../weapons/melee/sword/sword';
 
 export class Player extends BaseEntity {
   private readonly SPEED = 100;
   private readonly BOUNCE_OFF_VELOCITY = 200;
+  private readonly ATTACK_POWER = 20;
 
   private readonly cursors: CursorKeys;
+  private readonly sword: Melee;
+
   private hasTakenDamage = false;
+
+  public get weapon(): Melee {
+    return this.sword;
+  }
+
+  public get attackPower(): number {
+    return this.ATTACK_POWER;
+  }
 
   constructor(
     scene: Scene,
@@ -22,6 +35,8 @@ export class Player extends BaseEntity {
     super(scene, x, y, 'player', colliders);
 
     this.cursors = this.scene.input.keyboard.createCursorKeys();
+
+    this.sword = new Sword(this.scene, this);
 
     this.initAnims();
     this.initEvents();
@@ -76,7 +91,9 @@ export class Player extends BaseEntity {
     this.playAfterRepeat('idle', 0);
   }
 
-  private attack(): void {}
+  private attack(): void {
+    this.sword.attack();
+  }
 
   private isCursorOnRight(): boolean {
     return (

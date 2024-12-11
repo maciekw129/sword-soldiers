@@ -56,7 +56,7 @@ export class GameScene extends ContextScene<null> {
     return objects.find(({ name }) => name === 'spawn');
   }
 
-  private createEnemies(enemyZones: ObjectLayer, quantity = 0): Enemies {
+  private createEnemies(enemyZones: ObjectLayer, quantity = 4): Enemies {
     const enemies = new Enemies(this);
 
     enemyZones.objects.forEach(({ type, x, y }) => {
@@ -66,7 +66,7 @@ export class GameScene extends ContextScene<null> {
           const enemy = new enemyTypes[type](this, x, y, this.player);
           enemies.add(enemy);
         },
-        repeat: quantity,
+        repeat: quantity - 1,
       });
     });
 
@@ -84,5 +84,10 @@ export class GameScene extends ContextScene<null> {
       (enemy) => this.player.takeDamage(enemy as Enemy),
       null
     );
+
+    this.physics.add.overlap(this.enemies, this.player.weapon, (enemy) => {
+      (enemy as Enemy).takeDamage(this.player.attackPower);
+      this.player.weapon.clearAttack();
+    });
   }
 }

@@ -9,7 +9,7 @@ export class HealthBar {
   private readonly width: number;
   private readonly height: number;
 
-  private value = 100;
+  private value: number;
   private readonly pixelPerHealth: number;
 
   constructor(
@@ -21,6 +21,8 @@ export class HealthBar {
     height = 4
   ) {
     this.bar = new Graphics(scene);
+
+    this.value = health;
 
     this.x = x;
     this.y = y;
@@ -37,6 +39,11 @@ export class HealthBar {
     this.x = x;
     this.y = y;
 
+    this.draw();
+  }
+
+  public decreaseHealth(value: number) {
+    this.value = this.value - value;
     this.draw();
   }
 
@@ -66,5 +73,9 @@ export class HealthBar {
       healthWidth - margin * 2,
       this.height - margin * 2
     );
+  }
+
+  public destroy(): void {
+    this.bar.destroy();
   }
 }
