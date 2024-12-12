@@ -40,13 +40,11 @@ export abstract class Melee extends Zone {
   }
 
   public attack(): void {
-    if (!this.isAttacking) {
-      (this.body as Body).setSize(this.rangeX, this.rangeY);
+    (this.body as Body).setSize(this.rangeX, this.rangeY);
 
-      this.scene.time.delayedCall(this.ATTACK_MAX_TIME, () =>
-        this.clearAttack()
-      );
-    }
+    this.scene.time.delayedCall(this.ATTACK_MAX_TIME, () => {
+      this.clearAttack();
+    });
   }
 
   public clearAttack(): void {

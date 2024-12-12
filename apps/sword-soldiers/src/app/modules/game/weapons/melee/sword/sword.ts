@@ -15,10 +15,12 @@ export class Sword extends Melee {
   protected override onUpdate(): void {
     super.onUpdate();
 
-    const { x, y } = this.entity.body;
+    const { x, y, width, height } = this.entity.body;
 
-    this.sword.x = x + this.entity.body.width;
-    this.sword.y = y + this.entity.body.height / 2;
+    this.sword.flipX = this.entity.flipX;
+
+    this.sword.x = this.entity.flipX ? x : x + width;
+    this.sword.y = y + height / 2;
 
     this.sword.setOrigin(0.5, 1);
   }
@@ -31,7 +33,7 @@ export class Sword extends Melee {
 
       this.scene.tweens.add({
         targets: this.sword,
-        angle: 180,
+        angle: this.getSwordAngle(),
         duration: this.ATTACK_MAX_TIME,
         onComplete: () => (this.isAttacking = false),
         ease: 'Linear',
@@ -39,5 +41,9 @@ export class Sword extends Melee {
         repeat: 0,
       });
     }
+  }
+
+  private getSwordAngle(): number {
+    return this.entity.flipX ? -180 : 180;
   }
 }
