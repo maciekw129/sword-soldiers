@@ -3,18 +3,18 @@ import { MapLayers } from './game.model';
 import ObjectLayer = Phaser.Tilemaps.ObjectLayer;
 import TiledObject = Phaser.Types.Tilemaps.TiledObject;
 import { ContextScene } from '../context.scene';
-import GameConfig = Phaser.Types.Core.GameConfig;
 import { Enemies } from '../../groups/enemies/enemies';
 import { enemyTypes } from '../../entities/enemies/enemy.const';
 import { Enemy } from '../../entities/enemies/enemy';
+import { SharedSettings } from '../../game.model';
 
 export class GameScene extends ContextScene<null> {
   private player: Player;
   private enemies: Enemies;
   private mapLayers: MapLayers;
 
-  constructor(gameConfig: GameConfig) {
-    super('game', gameConfig, null);
+  constructor(sharedSettings: SharedSettings) {
+    super('game', sharedSettings);
   }
 
   protected create(): void {
@@ -48,15 +48,16 @@ export class GameScene extends ContextScene<null> {
   }
 
   private setFollowUpCamera(player: Player): void {
-    this.cameras.main.setZoom(2.25);
-    this.cameras.main.startFollow(player, true);
+    this.cameras.main
+      .startFollow(player)
+      .setZoom(this.sharedSettings.zoomFactor);
   }
 
   private findSpawnZone({ objects }: ObjectLayer): TiledObject {
     return objects.find(({ name }) => name === 'spawn');
   }
 
-  private createEnemies(enemyZones: ObjectLayer, quantity = 4): Enemies {
+  private createEnemies(enemyZones: ObjectLayer, quantity = 1): Enemies {
     const enemies = new Enemies(this);
 
     enemyZones.objects.forEach(({ type, x, y }) => {

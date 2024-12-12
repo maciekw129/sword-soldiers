@@ -1,18 +1,18 @@
 import { Scene } from 'phaser';
-import GameConfig = Phaser.Types.Core.GameConfig;
+import { SharedSettings } from '../game.model';
 
 export abstract class ContextScene<T> extends Scene {
-  protected readonly context: T;
-  protected readonly gameConfig: GameConfig;
+  public readonly context: T;
+  public readonly sharedSettings: SharedSettings;
 
   protected constructor(
     config: string | Phaser.Types.Scenes.SettingsConfig,
-    gameConfig: GameConfig,
-    context: T
+    sharedSettings: SharedSettings,
+    context?: T
   ) {
     super(config);
 
     this.context = context;
-    this.gameConfig = gameConfig;
+    this.sharedSettings = sharedSettings;
   }
 }

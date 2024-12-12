@@ -4,6 +4,8 @@ import Texture = Phaser.Textures.Texture;
 import ArcadeColliderType = Phaser.Types.Physics.Arcade.ArcadeColliderType;
 
 export abstract class BaseEntity extends Sprite {
+  protected abstract health: number;
+
   constructor(
     scene: Scene,
     x: number,

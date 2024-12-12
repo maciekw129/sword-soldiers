@@ -1,12 +1,12 @@
 import CursorKeys = Phaser.Types.Input.Keyboard.CursorKeys;
 import { createPlayerAnims } from './player.anims';
 import { BaseEntity } from '../base-entity';
-import { Scene } from 'phaser';
 import { Enemy } from '../enemies/enemy';
 import ArcadeColliderType = Phaser.Types.Physics.Arcade.ArcadeColliderType;
 import ArcadeBodyCollision = Phaser.Types.Physics.Arcade.ArcadeBodyCollision;
-import { Melee } from '../../weapons/melee/melee';
 import { Sword } from '../../weapons/melee/sword/sword';
+import { HealthBar } from '../../elements/health-bar/health-bar';
+import { ContextScene } from '../../scenes/context.scene';
 
 export class Player extends BaseEntity {
   private readonly SPEED = 100;
@@ -14,11 +14,13 @@ export class Player extends BaseEntity {
   private readonly ATTACK_POWER = 20;
 
   private readonly cursors: CursorKeys;
-  private readonly sword: Melee;
+  private readonly sword: Sword;
+  private readonly healthBar: HealthBar;
 
+  protected health: number;
   private hasTakenDamage = false;
 
-  public get weapon(): Melee {
+  public get weapon(): Sword {
     return this.sword;
   }
 
@@ -27,7 +29,7 @@ export class Player extends BaseEntity {
   }
 
   constructor(
-    scene: Scene,
+    scene: ContextScene<unknown>,
     x: number,
     y: number,
     colliders: ArcadeColliderType[] = []
@@ -37,6 +39,15 @@ export class Player extends BaseEntity {
     this.cursors = this.scene.input.keyboard.createCursorKeys();
 
     this.sword = new Sword(this.scene, this);
+    this.healthBar = new HealthBar(
+      scene,
+      100,
+      scene.sharedSettings.leftTopCorner.x + 5,
+      scene.sharedSettings.leftTopCorner.y + 5,
+      100,
+      10
+    );
+    this.healthBar.bar.setScrollFactor(0, 0);
 
     this.initAnims();
     this.initEvents();
@@ -102,10 +113,16 @@ export class Player extends BaseEntity {
   }
 
   public takeDamage(enemy: Enemy): void {
+    this.decreaseHealth(enemy.ATTACK);
     this.addDamageTween();
     this.hasTakenDamage = true;
     this.bounceOff(this.body.touching);
     this.scene.time.delayedCall(150, () => (this.hasTakenDamage = false));
+  }
+
+  private decreaseHealth(value: number): void {
+    this.health -= value;
+    this.healthBar.decreaseHealth(value);
   }
 
   private addDamageTween(): void {

@@ -2,7 +2,7 @@ import { Scene } from 'phaser';
 import Graphics = Phaser.GameObjects.Graphics;
 
 export class HealthBar {
-  private readonly bar: Graphics;
+  public readonly bar: Graphics;
 
   private x: number;
   private y: number;
