@@ -33,10 +33,12 @@ export abstract class Melee extends Zone {
   }
 
   protected onUpdate(): void {
-    const { x, y } = this.getPosition(this.entity);
+    if (this.entity.body) {
+      const { x, y } = this.getPosition(this.entity);
 
-    (this.body as Body).x = x;
-    (this.body as Body).y = y;
+      (this.body as Body).x = x;
+      (this.body as Body).y = y;
+    }
   }
 
   public attack(): void {

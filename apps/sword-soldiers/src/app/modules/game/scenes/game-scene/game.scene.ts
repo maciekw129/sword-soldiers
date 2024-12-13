@@ -91,4 +91,37 @@ export class GameScene extends ContextScene<null> {
       this.player.weapon.clearAttack();
     });
   }
+
+  public gameOver(): void {
+    this.physics.pause();
+
+    this.add
+      .text(
+        this.sharedSettings.center.x,
+        this.sharedSettings.center.y,
+        'Game Over!',
+        { fontSize: '48px', color: '#ff0000', fontStyle: 'bold' }
+      )
+      .setScrollFactor(0)
+      .setOrigin(0.5);
+
+    const button = this.add
+      .text(
+        this.sharedSettings.center.x,
+        +this.sharedSettings.gameConfig.height / 2 + 50,
+        'play again',
+        { backgroundColor: '#000', padding: { x: 5, y: 5 } }
+      )
+      .setInteractive()
+      .setScrollFactor(0)
+      .setOrigin(0.5);
+
+    button.on(
+      'pointerup',
+      () => {
+        this.scene.restart();
+      },
+      this
+    );
+  }
 }

@@ -62,6 +62,7 @@ export class GameComponent implements OnInit, OnDestroy {
     return {
       gameConfig: this.config,
       zoomFactor: this.ZOOM_FACTOR,
+      center: GameUtils.calculateCenter(this.width(), this.HEIGHT),
       leftTopCorner: GameUtils.calculateLeftTopCorner(
         this.width(),
         this.HEIGHT,

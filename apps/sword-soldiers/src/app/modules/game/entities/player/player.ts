@@ -7,6 +7,7 @@ import ArcadeBodyCollision = Phaser.Types.Physics.Arcade.ArcadeBodyCollision;
 import { Sword } from '../../weapons/melee/sword/sword';
 import { HealthBar } from '../../elements/health-bar/health-bar';
 import { ContextScene } from '../../scenes/context.scene';
+import { GameScene } from '../../scenes/game-scene/game.scene';
 
 export class Player extends BaseEntity {
   private readonly SPEED = 100;
@@ -17,7 +18,7 @@ export class Player extends BaseEntity {
   private readonly sword: Sword;
   private readonly healthBar: HealthBar;
 
-  protected health: number;
+  protected health = 100;
   private hasTakenDamage = false;
 
   public get weapon(): Sword {
@@ -68,13 +69,15 @@ export class Player extends BaseEntity {
   }
 
   protected override onUpdate(): void {
-    this.flipX = this.isCursorOnRight();
+    if (this.scene && this.body) {
+      this.flipX = this.isCursorOnRight();
 
-    if (this.hasTakenDamage) {
-      return;
+      if (this.hasTakenDamage) {
+        return;
+      }
+
+      this.addMovement();
     }
-
-    this.addMovement();
   }
 
   private addMovement(): void {
@@ -108,21 +111,28 @@ export class Player extends BaseEntity {
 
   private isCursorOnRight(): boolean {
     return (
-      this.scene.input.mousePointer.x < Number(this.scene.game.config.width) / 2
+      this.scene?.input.mousePointer.x <
+      Number(this.scene.game.config.width) / 2
     );
   }
 
   public takeDamage(enemy: Enemy): void {
-    this.decreaseHealth(enemy.ATTACK);
-    this.addDamageTween();
-    this.hasTakenDamage = true;
-    this.bounceOff(this.body.touching);
-    this.scene.time.delayedCall(150, () => (this.hasTakenDamage = false));
+    if (this.health) {
+      this.addDamageTween();
+      this.hasTakenDamage = true;
+      this.bounceOff(this.body.touching);
+      this.scene.time.delayedCall(150, () => (this.hasTakenDamage = false));
+      this.decreaseHealth(enemy.ATTACK);
+    }
   }
 
   private decreaseHealth(value: number): void {
     this.health -= value;
     this.healthBar.decreaseHealth(value);
+
+    if (this.health <= 0) {
+      (this.scene as GameScene).gameOver();
+    }
   }
 
   private addDamageTween(): void {

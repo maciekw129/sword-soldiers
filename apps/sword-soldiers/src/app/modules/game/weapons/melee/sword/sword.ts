@@ -15,14 +15,16 @@ export class Sword extends Melee {
   protected override onUpdate(): void {
     super.onUpdate();
 
-    const { x, y, width, height } = this.entity.body;
+    if (this.entity.body) {
+      const { x, y, width, height } = this.entity.body;
 
-    this.sword.flipX = this.entity.flipX;
+      this.sword.flipX = this.entity.flipX;
 
-    this.sword.x = this.entity.flipX ? x : x + width;
-    this.sword.y = y + height / 2;
+      this.sword.x = this.entity.flipX ? x : x + width;
+      this.sword.y = y + height / 2;
 
-    this.sword.setOrigin(0.5, 1);
+      this.sword.setOrigin(0.5, 1);
+    }
   }
 
   public override attack() {

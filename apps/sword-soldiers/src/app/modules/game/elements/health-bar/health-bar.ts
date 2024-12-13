@@ -44,6 +44,11 @@ export class HealthBar {
 
   public decreaseHealth(value: number) {
     this.value = this.value - value;
+
+    if (value < 0) {
+      this.value = 0;
+    }
+
     this.draw();
   }
 

@@ -22,4 +22,11 @@ export class GameUtils {
       y: (height - height / zoomFactor) / 2,
     };
   }
+
+  public static calculateCenter(width: number, height: number): Position {
+    return {
+      x: width / 2,
+      y: height / 2,
+    };
+  }
 }
