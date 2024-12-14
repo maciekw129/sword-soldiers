@@ -39,7 +39,7 @@ export abstract class Enemy extends BaseEntity {
     this.healthBar.setPosition(this.x, this.y);
   }
 
-  public takeDamage(weapon: Melee): void {
+  public takeDamage(weapon: Melee): boolean {
     this.health -= weapon.ATTACK;
     this.healthBar.decreaseHealth(weapon.ATTACK);
 
@@ -47,7 +47,10 @@ export abstract class Enemy extends BaseEntity {
 
     if (this.health <= 0) {
       this.destroyEnemy();
+      return true;
     }
+
+    return false;
   }
 
   public destroyEnemy(): void {

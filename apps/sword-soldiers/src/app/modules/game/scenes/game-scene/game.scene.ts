@@ -2,6 +2,7 @@ import { Player } from '../../entities/player/player';
 import { MapLayers } from './game.model';
 import ObjectLayer = Phaser.Tilemaps.ObjectLayer;
 import TiledObject = Phaser.Types.Tilemaps.TiledObject;
+import Text = Phaser.GameObjects.Text;
 import { ContextScene } from '../context.scene';
 import { Enemies } from '../../groups/enemies/enemies';
 import { enemyTypes } from '../../entities/enemies/enemy.const';
@@ -12,6 +13,8 @@ export class GameScene extends ContextScene<null> {
   private player: Player;
   private enemies: Enemies;
   private mapLayers: MapLayers;
+  private score = 0;
+  private scoreText: Text;
 
   constructor(sharedSettings: SharedSettings) {
     super('game', sharedSettings);
@@ -27,6 +30,7 @@ export class GameScene extends ContextScene<null> {
     this.enemies = this.createEnemies(this.mapLayers.enemyZones);
 
     this.createColliders();
+    this.createScoreText();
     this.setFollowUpCamera(this.player);
   }
 
@@ -87,30 +91,47 @@ export class GameScene extends ContextScene<null> {
     );
 
     this.physics.add.overlap(this.enemies, this.player.weapon, (enemy) => {
-      (enemy as Enemy).takeDamage(this.player.weapon);
+      const enemyDied = (enemy as Enemy).takeDamage(this.player.weapon);
+
+      if (enemyDied) {
+        this.score++;
+        this.updateScoreText();
+      }
     });
+  }
+
+  private createScoreText(): void {
+    const { x, y } = this.sharedSettings.rightTopCorner;
+
+    this.scoreText = this.add
+      .text(x - 25, y + 10, '0')
+      .setScrollFactor(0)
+      .setOrigin(0.5);
+  }
+
+  private updateScoreText(): void {
+    this.scoreText.setText(`${this.score}`);
   }
 
   public gameOver(): void {
     this.physics.pause();
 
+    const { x, y } = this.sharedSettings.center;
+
     this.add
-      .text(
-        this.sharedSettings.center.x,
-        this.sharedSettings.center.y,
-        'Game Over!',
-        { fontSize: '48px', color: '#ff0000', fontStyle: 'bold' }
-      )
+      .text(x, y, 'Game Over!', {
+        fontSize: '48px',
+        color: '#ff0000',
+        fontStyle: 'bold',
+      })
       .setScrollFactor(0)
       .setOrigin(0.5);
 
     const button = this.add
-      .text(
-        this.sharedSettings.center.x,
-        +this.sharedSettings.gameConfig.height / 2 + 50,
-        'play again',
-        { backgroundColor: '#000', padding: { x: 5, y: 5 } }
-      )
+      .text(x, +this.sharedSettings.gameConfig.height / 2 + 50, 'play again', {
+        backgroundColor: '#000',
+        padding: { x: 5, y: 5 },
+      })
       .setInteractive()
       .setScrollFactor(0)
       .setOrigin(0.5);
