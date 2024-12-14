@@ -4,6 +4,8 @@ import { BaseEntity } from '../../../entities/base-entity';
 import Image = Phaser.GameObjects.Image;
 
 export class Sword extends Melee {
+  public ATTACK = 20;
+
   private readonly sword: Image;
 
   constructor(scene: Scene, entity: BaseEntity) {

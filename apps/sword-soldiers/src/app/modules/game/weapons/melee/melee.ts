@@ -6,6 +6,7 @@ import Zone = Phaser.GameObjects.Zone;
 
 export abstract class Melee extends Zone {
   protected ATTACK_MAX_TIME = 100;
+  public abstract ATTACK: number;
   private readonly rangeX: number;
   private readonly rangeY: number;
 
@@ -27,9 +28,10 @@ export abstract class Melee extends Zone {
 
     scene.physics.add.existing(this);
 
-    (this.body as Body).setSize(0, 0);
+    (this.body as Body).setSize(this.rangeX, this.rangeY);
 
     scene.events.on(Phaser.Scenes.Events.UPDATE, this.onUpdate, this);
+    (this.body as Body).setEnable(false);
   }
 
   protected onUpdate(): void {
@@ -42,7 +44,7 @@ export abstract class Melee extends Zone {
   }
 
   public attack(): void {
-    (this.body as Body).setSize(this.rangeX, this.rangeY);
+    (this.body as Body).setEnable(true);
 
     this.scene.time.delayedCall(this.ATTACK_MAX_TIME, () => {
       this.clearAttack();
@@ -50,13 +52,13 @@ export abstract class Melee extends Zone {
   }
 
   public clearAttack(): void {
-    (this.body as Body).setSize(0, 0);
+    (this.body as Body).setEnable(false);
   }
 
   private getPosition(entity: BaseEntity): Position {
     return {
       x: entity.flipX
-        ? entity.body.x - 2 * entity.body.width
+        ? entity.body.x - 3 * entity.body.width
         : entity.body.x + entity.body.width,
       y:
         entity.body.y -

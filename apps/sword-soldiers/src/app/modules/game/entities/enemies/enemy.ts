@@ -2,6 +2,7 @@ import { Scene } from 'phaser';
 import Texture = Phaser.Textures.Texture;
 import { BaseEntity } from '../base-entity';
 import { HealthBar } from '../../elements/health-bar/health-bar';
+import { Melee } from '../../weapons/melee/melee';
 
 export abstract class Enemy extends BaseEntity {
   public abstract readonly SPEED: number;
@@ -38,9 +39,11 @@ export abstract class Enemy extends BaseEntity {
     this.healthBar.setPosition(this.x, this.y);
   }
 
-  public takeDamage(value: number): void {
-    this.health -= value;
-    this.healthBar.decreaseHealth(value);
+  public takeDamage(weapon: Melee): void {
+    this.health -= weapon.ATTACK;
+    this.healthBar.decreaseHealth(weapon.ATTACK);
+
+    weapon.clearAttack();
 
     if (this.health <= 0) {
       this.destroyEnemy();

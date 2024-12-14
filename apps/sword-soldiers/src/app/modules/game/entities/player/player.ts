@@ -12,7 +12,6 @@ import { GameScene } from '../../scenes/game-scene/game.scene';
 export class Player extends BaseEntity {
   private readonly SPEED = 100;
   private readonly BOUNCE_OFF_VELOCITY = 200;
-  private readonly ATTACK_POWER = 20;
 
   private readonly cursors: CursorKeys;
   private readonly sword: Sword;
@@ -23,10 +22,6 @@ export class Player extends BaseEntity {
 
   public get weapon(): Sword {
     return this.sword;
-  }
-
-  public get attackPower(): number {
-    return this.ATTACK_POWER;
   }
 
   constructor(

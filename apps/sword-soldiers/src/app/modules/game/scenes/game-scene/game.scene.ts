@@ -87,8 +87,7 @@ export class GameScene extends ContextScene<null> {
     );
 
     this.physics.add.overlap(this.enemies, this.player.weapon, (enemy) => {
-      (enemy as Enemy).takeDamage(this.player.attackPower);
-      this.player.weapon.clearAttack();
+      (enemy as Enemy).takeDamage(this.player.weapon);
     });
   }
 
