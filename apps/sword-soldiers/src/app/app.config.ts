@@ -20,6 +20,9 @@ import { UsersService, usersStore } from '@data-access/users';
 import { MessageService } from 'primeng/api';
 import { environment } from '../environments/environment';
 import { initializeApp } from './initialize-app';
+import { providePrimeNG } from 'primeng/config';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import Aura from '@primeng/themes/aura';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -31,6 +34,12 @@ export const appConfig: ApplicationConfig = {
     },
     provideZoneChangeDetection({ eventCoalescing: true }),
     importProvidersFrom([BrowserAnimationsModule]),
+    provideAnimationsAsync(),
+    providePrimeNG({
+      theme: {
+        preset: Aura,
+      },
+    }),
     provideRouter(appRoutes),
     provideAuth0(environment.authConfig),
     AuthHttpInterceptor,

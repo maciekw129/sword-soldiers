@@ -1,9 +1,10 @@
 <div class="input-text">
   <label class="input-text__label" [for]="controlId">{{ label() }}</label>
   <input
+    class="input"
     pInputText
     [type]="type()"
-    [readOnly]="readOnly()"
+    [readonly]="readonly()"
     [id]="controlId"
     [formControl]="formControl"
     [placeholder]="placeholder()"

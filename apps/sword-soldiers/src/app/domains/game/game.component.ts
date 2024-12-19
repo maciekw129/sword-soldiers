@@ -18,7 +18,6 @@ import { GameUtils } from './game.utils';
 @Component({
   standalone: true,
   templateUrl: 'game.component.html',
-  styleUrl: 'game.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [GameService],
 })

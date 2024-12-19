@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { UserGuards } from './core/user/user.guards';
+import { UserGuards } from './domains/user/user.guards';
 import { authGuardFn } from '@auth0/auth0-angular';
 
 export const appRoutes: Route[] = [
@@ -7,7 +7,7 @@ export const appRoutes: Route[] = [
     path: 'create-user',
     canActivate: [UserGuards.canCreateUser()],
     loadComponent: () =>
-      import('./core/user/create-user/create-user.component').then(
+      import('./domains/user/create-user/create-user.component').then(
         (c) => c.CreateUserComponent
       ),
   },
@@ -18,7 +18,7 @@ export const appRoutes: Route[] = [
       {
         path: '',
         loadComponent: () =>
-          import('./modules/home/home.component').then((c) => c.HomeComponent),
+          import('./domains/home/home.component').then((c) => c.HomeComponent),
       },
       {
         path: 'user-profile',
@@ -27,7 +27,7 @@ export const appRoutes: Route[] = [
         },
         canActivate: [authGuardFn],
         loadComponent: () =>
-          import('./modules/user-profile/user-profile.component').then(
+          import('./domains/user/user-profile/user-profile.component').then(
             (c) => c.UserProfileComponent
           ),
       },
@@ -38,7 +38,7 @@ export const appRoutes: Route[] = [
         },
         canActivate: [authGuardFn],
         loadComponent: () =>
-          import('./modules/game/game.component').then((c) => c.GameComponent),
+          import('./domains/game/game.component').then((c) => c.GameComponent),
       },
     ],
   },

@@ -9,13 +9,4 @@ export const createDemonAnims = (anims: AnimationManager): void => {
     frameRate: 10,
     repeat: -1,
   });
-
-  anims.create({
-    key: 'demon-run',
-    frames: anims.generateFrameNumbers('demon', {
-      frames: [4, 5, 6, 7],
-    }),
-    frameRate: 10,
-    repeat: -1,
-  });
 };

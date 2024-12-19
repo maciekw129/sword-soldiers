@@ -7,15 +7,21 @@ import {
   inject,
   signal,
 } from '@angular/core';
-import { InputTextComponent } from '@ui/controls';
-import { FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { InputTextComponent, SelectButtonsComponent } from '@ui/controls';
+import { FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UserProfileControls } from './user-profile.model';
 import { ButtonComponent } from '@ui/components';
 import { FormComponent } from '@utils/abstracts';
 import { tap } from 'rxjs';
 import { MessageService } from 'primeng/api';
-import { characterLabels, genderLabels } from '../../core/user/user.const';
-import { UserDto, UsersService, usersStore } from '@data-access/users';
+import { CHARACTER_LABELS, GENDER_LABELS, OPTIONS } from '../user.const';
+import {
+  Character,
+  Gender,
+  UserDto,
+  UsersService,
+  usersStore,
+} from '@data-access/users';
 import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
@@ -23,7 +29,12 @@ import { AuthService } from '@auth0/auth0-angular';
   templateUrl: './user-profile.component.html',
   styleUrl: './user-profile.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [InputTextComponent, ReactiveFormsModule, ButtonComponent],
+  imports: [
+    InputTextComponent,
+    ReactiveFormsModule,
+    ButtonComponent,
+    SelectButtonsComponent,
+  ],
 })
 export class UserProfileComponent
   extends FormComponent<UserProfileControls>
@@ -38,8 +49,9 @@ export class UserProfileComponent
     super.ngOnInit();
   }
 
-  public readonly genderLabels = genderLabels;
-  public readonly characterLabels = characterLabels;
+  public readonly genderLabels = GENDER_LABELS;
+  public readonly characterLabels = CHARACTER_LABELS;
+  public readonly options = OPTIONS;
 
   public isEditMode = signal(false);
   public isLoading = signal(false);
@@ -49,14 +61,22 @@ export class UserProfileComponent
 
     effect(() => {
       if (!this.isEditMode()) {
-        this.form.reset(this.user() ?? {});
+        this.form.reset(this.user());
       }
     });
   }
 
   protected buildForm(): FormGroup<UserProfileControls> {
     return this.fb.group({
-      name: this.fb.control(this.user()?.name ?? ''),
+      name: this.fb.control(this.user()?.name ?? '', {
+        validators: Validators.required,
+      }),
+      gender: this.fb.control<Gender>(this.user()?.gender, {
+        validators: Validators.required,
+      }),
+      character: this.fb.control<Character>(this.user()?.character, {
+        validators: Validators.required,
+      }),
     });
   }
 

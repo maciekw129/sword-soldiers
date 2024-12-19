@@ -1,5 +1,5 @@
 import { ControlValueAccessor, FormControl, NgControl } from '@angular/forms';
-import { Directive, Input, input, OnInit } from '@angular/core';
+import { Directive, input, OnInit } from '@angular/core';
 
 @Directive()
 export abstract class CustomFormControl<T>
@@ -12,7 +12,7 @@ export abstract class CustomFormControl<T>
   }
 
   public validationErrorsContent = input<Record<string, string>>({});
-  public readOnly = input(false);
+  public readonly = input(false);
 
   public formControl!: FormControl<T>;
   public controlId = CustomFormControl.generateControlId();

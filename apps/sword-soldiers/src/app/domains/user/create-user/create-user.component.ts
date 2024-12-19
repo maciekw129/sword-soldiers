@@ -16,7 +16,7 @@ import {
 import { ButtonComponent } from '@ui/components';
 import { tap } from 'rxjs';
 import { Router } from '@angular/router';
-import { options } from './create-user.const';
+import { OPTIONS } from '../user.const';
 
 @Component({
   standalone: true,
@@ -36,7 +36,7 @@ export class CreateUserComponent extends FormComponent<CreateUserControls> {
   private userStore = inject(usersStore);
   private readonly router = inject(Router);
 
-  public readonly options = options;
+  public readonly options = OPTIONS;
 
   protected buildForm(): FormGroup<CreateUserControls> {
     return this.fb.group({

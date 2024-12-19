@@ -1,0 +1,52 @@
+<div class="user-profile">
+  <form
+    [formGroup]="form"
+    (ngSubmit)="onSubmit()"
+    class="user-profile__content main-container flex flex-column"
+  >
+    <h2>User profile</h2>
+
+    <div class="user-profile__data">
+      <ui-input-text
+        label="Soldier name"
+        formControlName="name"
+        [readonly]="!isEditMode()"
+      />
+      <div>
+        <p>
+          Character: @if(!isEditMode()) { {{ genderLabels[user().gender] }}
+          {{ characterLabels[user().character] }}
+          }
+        </p>
+      </div>
+
+      @if(isEditMode()){
+      <div class="user-profile__character">
+        <ui-select-buttons
+          formControlName="gender"
+          [options]="options.gender"
+          [readonly]="!isEditMode()"
+        />
+        <ui-select-buttons
+          formControlName="character"
+          [options]="options.character"
+          [readonly]="!isEditMode()"
+        />
+      </div>
+      }
+    </div>
+
+    @if (isEditMode()) {
+    <div>
+      <ui-button
+        label="Cancel"
+        design="text"
+        (onClick)="isEditMode.set(false)"
+      />
+      <ui-button label="Submit" type="submit" [isLoading]="isLoading()" />
+    </div>
+    } @else {
+    <ui-button label="Edit" (onClick)="isEditMode.set(true)" />
+    }
+  </form>
+</div>

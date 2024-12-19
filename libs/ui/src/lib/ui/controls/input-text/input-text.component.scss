@@ -2,8 +2,13 @@
   width: 100%;
 }
 
+.input:read-only, .input:read-only:hover, .input:read-only:focus {
+  border-color: black;
+}
+
 .input-text {
   display: flex;
   flex-direction: column;
   gap: var(--space-1);
 }
+
