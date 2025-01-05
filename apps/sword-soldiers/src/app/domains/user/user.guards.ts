@@ -1,5 +1,5 @@
 import { inject } from '@angular/core';
-import { usersStore } from '@data-access/users';
+import { Permission, usersStore } from '@data-access/users';
 import {
   ActivatedRouteSnapshot,
   CanActivateFn,
@@ -8,6 +8,7 @@ import {
 } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { UserUtils } from './user.utils';
 
 export class UserGuards {
   public static shouldCreateUser(): CanActivateFn {
@@ -26,6 +27,14 @@ export class UserGuards {
       const isAuthenticated = toSignal(inject(AuthService).isAuthenticated$);
 
       return Boolean(isAuthenticated()) && user() === null;
+    };
+  }
+
+  public static permission(requiredPermissions: Permission[]): CanActivateFn {
+    return () => {
+      const { permissions } = inject(usersStore);
+
+      return UserUtils.hasAnyPermission(permissions(), requiredPermissions);
     };
   }
 }

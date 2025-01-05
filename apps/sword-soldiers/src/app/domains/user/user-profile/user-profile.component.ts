@@ -22,7 +22,6 @@ import {
   UsersService,
   usersStore,
 } from '@data-access/users';
-import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
   standalone: true,
@@ -43,11 +42,6 @@ export class UserProfileComponent
   private readonly userStore = inject(usersStore);
   private readonly userService = inject(UsersService);
   private readonly messageService = inject(MessageService);
-  private readonly authService = inject(AuthService);
-
-  override ngOnInit() {
-    super.ngOnInit();
-  }
 
   public readonly genderLabels = GENDER_LABELS;
   public readonly characterLabels = CHARACTER_LABELS;
