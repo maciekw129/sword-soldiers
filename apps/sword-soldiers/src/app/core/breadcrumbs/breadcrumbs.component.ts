@@ -8,7 +8,12 @@ import {
   WritableSignal,
 } from '@angular/core';
 import { MenuItem } from 'primeng/api';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import {
+  ActivatedRoute,
+  NavigationEnd,
+  Router,
+  RouterLink,
+} from '@angular/router';
 import { filter, tap } from 'rxjs';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -19,7 +24,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   templateUrl: 'breadcrumbs.component.html',
   styleUrl: 'breadcrumbs.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [BreadcrumbModule],
+  imports: [BreadcrumbModule, RouterLink],
 })
 export class BreadcrumbsComponent implements OnInit {
   private readonly router = inject(Router);
@@ -75,7 +80,7 @@ export class BreadcrumbsComponent implements OnInit {
       }
 
       if (label && routeURL) {
-        breadcrumbs.push({ label, url });
+        breadcrumbs.push({ label, routerLink: url });
       }
 
       return this.createBreadcrumbs(child, url, breadcrumbs);

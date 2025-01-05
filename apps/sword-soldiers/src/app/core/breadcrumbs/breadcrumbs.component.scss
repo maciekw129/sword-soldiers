@@ -2,3 +2,13 @@
   background: none;
   border: none;
 }
+
+.breadcrumbs {
+  &__link {
+    text-decoration: none;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

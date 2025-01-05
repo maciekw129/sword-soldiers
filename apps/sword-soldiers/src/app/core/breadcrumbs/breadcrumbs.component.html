@@ -1,4 +1,11 @@
 @if (menuItems().length > 0) {
-  <p-breadcrumb [home]="home" [model]="menuItems()"/>
+  <p-breadcrumb [home]="home" [model]="menuItems()">
+    <ng-template #item let-item>
+      <a class="breadcrumbs__link" [routerLink]="item.routerLink">
+        {{item.label}}
+      </a>
+    </ng-template>
+    <ng-template #separator> / </ng-template>
+  </p-breadcrumb>
 }
 
