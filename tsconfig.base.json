@@ -16,11 +16,13 @@
     "baseUrl": ".",
     "paths": {
       "@data-access": ["libs/data-access/index.ts"],
+      "@data-access/game-maps": ["libs/data-access/src/lib/game-maps/index.ts"],
       "@data-access/users": ["libs/data-access/src/lib/users/index.ts"],
       "@ui/components": ["libs/ui/src/lib/ui/components/index.ts"],
       "@ui/controls": ["libs/ui/src/lib/ui/controls/index.ts"],
       "@utils/abstracts": ["libs/utils/src/lib/utils/abstracts/index.ts"],
       "@utils/functions": ["libs/utils/src/lib/utils/functions/index.ts"],
+      "@utils/injection-hooks": ["libs/utils/src/lib/utils/injection-hooks/index.ts"],
       "@utils/services": ["libs/utils/src/lib/utils/services/index.ts"],
       "@utils/types": ["libs/utils/src/lib/utils/types/index.ts"]
     }

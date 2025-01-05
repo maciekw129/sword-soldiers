@@ -7,7 +7,7 @@ import {
 
 @Directive()
 export abstract class FormComponent<
-  T extends { [K in keyof T]: AbstractControl<any, any> }
+  T extends { [K in keyof T]: AbstractControl<unknown, unknown> }
 > implements OnInit
 {
   protected readonly fb = inject(NonNullableFormBuilder);

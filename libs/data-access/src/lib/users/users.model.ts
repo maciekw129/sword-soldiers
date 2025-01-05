@@ -30,6 +30,7 @@ export interface TokenPayload extends JwtPayload {
 
 export const enum Permission {
   EDIT_CONTENT = 'edit:content',
+  CREATE_GAME_MAPS = 'create:game-maps',
 }
 
 export interface UserState {
