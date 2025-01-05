@@ -3,7 +3,6 @@ import { SidebarMenuItem, SidebarPosition } from './sidebar-menu.model';
 import { ButtonComponent } from '../button/button.component';
 import { RouterLink } from '@angular/router';
 import { TooltipModule } from 'primeng/tooltip';
-import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'ui-sidebar-menu',
@@ -11,9 +10,14 @@ import { NgClass } from '@angular/common';
   templateUrl: 'sidebar-menu.component.html',
   styleUrl: 'sidebar-menu.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [ButtonComponent, RouterLink, TooltipModule, NgClass],
+  imports: [ButtonComponent, RouterLink, TooltipModule],
 })
-export class SidebarMenuComponent {
-  public items = input.required<SidebarMenuItem[]>();
+export class SidebarMenuComponent<
+  A = Record<string, () => unknown>,
+  P = unknown
+> {
+  public items = input.required<SidebarMenuItem<A, P>[]>();
+  public actions = input<A>();
+  public params = input<P>();
   public position = input<SidebarPosition>('right');
 }

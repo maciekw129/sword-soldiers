@@ -7,11 +7,13 @@ import {
 } from '@angular/core';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { ToastModule } from 'primeng/toast';
-import { SidebarMenuComponent, SidebarMenuItem } from '@ui/components';
-import { PrimeIcons } from 'primeng/api';
+import { SidebarMenuComponent } from '@ui/components';
 import { AuthService } from '@auth0/auth0-angular';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { BreadcrumbsComponent } from '../breadcrumbs/breadcrumbs.component';
+import { usersStore } from '@data-access/users';
+import { SidebarActions, SidebarParams } from '../sidebar/sidebar.model';
+import { MENU_ITEMS } from '../sidebar/sidebar.const';
 
 @Component({
   selector: 's-shell',
@@ -27,37 +29,25 @@ import { BreadcrumbsComponent } from '../breadcrumbs/breadcrumbs.component';
 })
 export class ShellComponent {
   private readonly authService = inject(AuthService);
+  private readonly usersStore = inject(usersStore);
+
+  public readonly menuItems = MENU_ITEMS;
 
   private readonly isAuthenticated: Signal<boolean> = toSignal(
     this.authService.isAuthenticated$
   );
 
-  public readonly menuItems: Signal<SidebarMenuItem[]> = computed(() => [
-    {
-      icon: PrimeIcons.SIGN_OUT,
-      text: 'Logout',
-      design: 'default',
-      action: () => this.logout(),
-      enabled: () => this.isAuthenticated(),
-    },
-    {
-      icon: PrimeIcons.HOME,
-      text: 'Home',
-      link: '/',
-    },
-    {
-      icon: PrimeIcons.USER,
-      text: 'My profile',
-      link: '/user-profile',
-      enabled: () => this.isAuthenticated(),
-    },
-  ]);
+  public readonly params: Signal<SidebarParams> = computed(() => ({
+    isAuthenticated: this.isAuthenticated(),
+    permissions: this.usersStore.permissions(),
+  }));
 
-  private logout(): void {
-    this.authService.logout({
-      logoutParams: {
-        returnTo: window.location.origin,
-      },
-    });
-  }
+  public readonly actions: SidebarActions = {
+    logout: () =>
+      this.authService.logout({
+        logoutParams: {
+          returnTo: window.location.origin,
+        },
+      }),
+  };
 }

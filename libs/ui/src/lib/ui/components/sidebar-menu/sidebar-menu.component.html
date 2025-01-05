@@ -1,11 +1,11 @@
 <nav [class]="'sidebar-menu'">
-  @for (item of items(); track item.link) { @if(!item.enabled || item.enabled())
+  @for (item of items(); track item.link) { @if(!item.enabled || item.enabled(params()))
   {
   <ui-button
     class="sidebar-menu__button"
     [icon]="item.icon"
     [routerLink]="item.link"
-    (onClick)="item.action ? item.action() : null"
+    (onClick)="item.action ? item.action(actions()) : null"
     [design]="item.design ?? 'text'"
     [pTooltip]="item.text"
   />
