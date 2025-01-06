@@ -1,3 +1,11 @@
-<s-shell>
-  <router-outlet/>
-</s-shell>
+<div class="main-container">
+  <s-navbar />
+  <ui-breadcrumbs/>
+  <main>
+    <router-outlet/>
+  </main>
+</div>
+
+<ui-sidebar-menu [items]="menuItems" [actions]="actions" [params]="params()" />
+
+<p-toast position="top-center" />

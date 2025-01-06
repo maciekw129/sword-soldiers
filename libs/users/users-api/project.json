@@ -1,0 +1,9 @@
+{
+  "name": "users-api",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/users/users-api/src",
+  "prefix": "lib",
+  "projectType": "library",
+  "tags": ["api"],
+  "targets": {}
+}

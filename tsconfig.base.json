@@ -15,16 +15,37 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@data-access": ["libs/data-access/index.ts"],
-      "@data-access/game-maps": ["libs/data-access/src/lib/game-maps/index.ts"],
-      "@data-access/users": ["libs/data-access/src/lib/users/index.ts"],
-      "@ui/components": ["libs/ui/src/lib/ui/components/index.ts"],
-      "@ui/controls": ["libs/ui/src/lib/ui/controls/index.ts"],
-      "@utils/abstracts": ["libs/utils/src/lib/utils/abstracts/index.ts"],
-      "@utils/functions": ["libs/utils/src/lib/utils/functions/index.ts"],
-      "@utils/injection-hooks": ["libs/utils/src/lib/utils/injection-hooks/index.ts"],
-      "@utils/services": ["libs/utils/src/lib/utils/services/index.ts"],
-      "@utils/types": ["libs/utils/src/lib/utils/types/index.ts"]
+      "@data-access": ["libs/shared/data-access/src/index.ts"],
+      "@game-maps/data-access": [
+        "libs/game-maps/game-maps-data-access/src/index.ts"
+      ],
+      "@game-maps/domain": ["libs/game-maps/game-maps-domain/src/index.ts"],
+      "@game-maps/maps-settings-feature": [
+        "libs/game-maps/features/game-maps-maps-settings-feature/src/index.ts"
+      ],
+      "@ui/components": ["libs/shared/ui/src/lib/ui/components/index.ts"],
+      "@ui/controls": ["libs/shared/ui/src/lib/ui/controls/index.ts"],
+      "@users/api": ["libs/users/users-api/src/index.ts"],
+      "@users/create-user-feature": [
+        "libs/users/features/users-create-user-feature/src/index.ts"
+      ],
+      "@users/data-access": ["libs/users/users-data-access/src/index.ts"],
+      "@users/domain": ["libs/users/users-domain/src/index.ts"],
+      "@users/user-profile-feature": [
+        "libs/users/features/users-user-profile-feature/src/index.ts"
+      ],
+      "@users/utils": ["libs/users/users-utils/src/index.ts"],
+      "@utils/abstracts": [
+        "libs/shared/utils/src/lib/utils/abstracts/index.ts"
+      ],
+      "@utils/functions": [
+        "libs/shared/utils/src/lib/utils/functions/index.ts"
+      ],
+      "@utils/injection-hooks": [
+        "libs/shared/utils/src/lib/utils/injection-hooks/index.ts"
+      ],
+      "@utils/services": ["libs/shared/utils/src/lib/utils/services/index.ts"],
+      "@utils/types": ["libs/shared/utils/src/lib/utils/types/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

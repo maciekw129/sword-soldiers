@@ -3,7 +3,7 @@ import { RouterLink } from '@angular/router';
 import { ButtonComponent } from '@ui/components';
 import { AuthService } from '@auth0/auth0-angular';
 import { AsyncPipe } from '@angular/common';
-import { usersStore } from '@data-access/users';
+import { usersStore } from '@users/api';
 
 @Component({
   selector: 's-navbar',

@@ -1,27 +1,25 @@
 import { Route } from '@angular/router';
-import { UserGuards } from './domains/user/user.guards';
+import { UsersGuards } from '@users/api';
 import { authGuardFn } from '@auth0/auth0-angular';
-import { SETTINGS_PERMISSIONS } from './domains/settings/settings.const';
+import { SETTINGS_PERMISSIONS } from './modules/settings/settings.const';
 import { APP_PATHS } from './app.const';
 import { AppRoute } from './app.model';
 
 export const appRoutes: Route[] = [
   {
     path: 'create-user',
-    canActivate: [UserGuards.canCreateUser()],
+    canActivate: [UsersGuards.canCreateUser()],
     loadComponent: () =>
-      import('./domains/user/create-user/create-user.component').then(
-        (c) => c.CreateUserComponent
-      ),
+      import('@users/create-user-feature').then((c) => c.CreateUserComponent),
   },
   {
     path: '',
-    canActivate: [UserGuards.shouldCreateUser()],
+    canActivate: [UsersGuards.shouldCreateUser()],
     children: [
       {
         path: '',
         loadComponent: () =>
-          import('./domains/home/home.component').then((c) => c.HomeComponent),
+          import('./modules/home/home.component').then((c) => c.HomeComponent),
       },
       {
         path: 'user-profile',
@@ -30,7 +28,7 @@ export const appRoutes: Route[] = [
         },
         canActivate: [authGuardFn],
         loadComponent: () =>
-          import('./domains/user/user-profile/user-profile.component').then(
+          import('@users/user-profile-feature').then(
             (c) => c.UserProfileComponent
           ),
       },
@@ -41,16 +39,19 @@ export const appRoutes: Route[] = [
         },
         canActivate: [authGuardFn],
         loadComponent: () =>
-          import('./domains/game/game.component').then((c) => c.GameComponent),
+          import('./modules/game/game.component').then((c) => c.GameComponent),
       },
       {
         path: APP_PATHS[AppRoute.SETTINGS],
         data: {
           breadcrumb: 'Settings',
         },
-        canActivate: [authGuardFn, UserGuards.permission(SETTINGS_PERMISSIONS)],
+        canActivate: [
+          authGuardFn,
+          UsersGuards.permission(SETTINGS_PERMISSIONS),
+        ],
         loadChildren: () =>
-          import('./domains/settings/settings-routing.module').then(
+          import('./modules/settings/settings-routing.module').then(
             (m) => m.SettingsRoutingModule
           ),
       },

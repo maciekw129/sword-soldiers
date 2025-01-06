@@ -1,0 +1,15 @@
+.create-user {
+  &__form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 500px;
+    gap: var(--space-3);
+  }
+
+  &__character {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+}
