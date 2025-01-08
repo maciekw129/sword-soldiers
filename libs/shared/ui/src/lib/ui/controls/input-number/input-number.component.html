@@ -1,0 +1,16 @@
+<p-floatlabel variant="in">
+  <p-inputNumber
+    [inputId]="controlId"
+    [formControl]="formControl"
+    [min]="min()"
+    [max]="max()"
+    [prefix]="prefix()"
+    [suffix]="suffix()"
+    [minFractionDigits]="minFractionDigits()"
+    [maxFractionDigits]="maxFractionDigits()"
+    [showButtons]="showButtons()"
+    [fluid]="fluid()"
+    [validationErrorsContent]="validationErrorsContent()"
+  />
+  <label [for]="controlId">{{ label() }}</label>
+</p-floatlabel>
