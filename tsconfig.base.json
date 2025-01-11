@@ -25,6 +25,7 @@
       ],
       "@ui/components": ["libs/shared/ui/src/lib/ui/components/index.ts"],
       "@ui/controls": ["libs/shared/ui/src/lib/ui/controls/index.ts"],
+      "@ui/directives": ["libs/shared/ui/src/lib/ui/directives/index.ts"],
       "@users/api": ["libs/users/users-api/src/index.ts"],
       "@users/create-user-feature": [
         "libs/users/features/users-create-user-feature/src/index.ts"
