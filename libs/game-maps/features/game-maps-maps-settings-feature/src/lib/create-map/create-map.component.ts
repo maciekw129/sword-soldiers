@@ -20,6 +20,7 @@ import { BackLinkDirective } from '@ui/directives';
 import { GameMapsHttpService } from '@game-maps/data-access';
 import { defer, finalize, tap } from 'rxjs';
 import { MessageService } from 'primeng/api';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   standalone: true,
@@ -40,6 +41,8 @@ import { MessageService } from 'primeng/api';
 export class CreateMapComponent extends FormComponent<CreateMapControls> {
   private readonly gameMapsHttpService = inject(GameMapsHttpService);
   private readonly messageService = inject(MessageService);
+  private readonly router = inject(Router);
+  private readonly activatedRoute = inject(ActivatedRoute);
 
   public readonly options = OPTIONS;
 
@@ -69,6 +72,13 @@ export class CreateMapComponent extends FormComponent<CreateMapControls> {
 
   protected onSubmitValidForm(): void {
     this.isLoading.set(true);
-    this.createMapRequest$.subscribe();
+
+    this.createMapRequest$
+      .pipe(
+        tap(() =>
+          this.router.navigate(['..'], { relativeTo: this.activatedRoute })
+        )
+      )
+      .subscribe();
   }
 }
