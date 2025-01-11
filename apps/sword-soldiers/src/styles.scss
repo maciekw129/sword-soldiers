@@ -8,8 +8,8 @@
 @use '../../../libs/shared/ui/src/lib/ui/styles/flex';
 
 :root {
-  @include spacing.initialize-spacing();
-  @include typing.initialize-font-sizes();
+  @include spacing.initialize-spacing;
+  @include typing.initialize-font-sizes;
 
   --max-content-width: 1050px;
 }
@@ -20,6 +20,8 @@
   padding: 0;
   font-family: typing.$primary-font;
 }
+
+@include spacing.generate-spacing-classes;
 
 .main-container {
   max-width: var(--max-content-width);

@@ -15,7 +15,7 @@ import {
   authHttpInterceptorFn,
   provideAuth0,
 } from '@auth0/auth0-angular';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { environment } from '../environments/environment';
 import { providePrimeNG } from 'primeng/config';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
@@ -47,5 +47,6 @@ export const appConfig: ApplicationConfig = {
       useValue: VALIDATION_ERRORS_DEFAULT_CONTENT,
     },
     MessageService,
+    ConfirmationService,
   ],
 };

@@ -17,4 +17,8 @@ export class GameMapsHttpService {
   public createGameMap$(body: CreateGameMapDto): Observable<GameMapDto> {
     return this.http.post<GameMapDto>(`${this.endpointBase}`, body);
   }
+
+  public removeGameMap$(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.endpointBase}/${id}`);
+  }
 }

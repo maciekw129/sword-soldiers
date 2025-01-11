@@ -11,6 +11,7 @@ import {
 } from './core/sidebar-menu/sidebar-menu.model';
 import { usersStore } from '@users/api';
 import { NavbarComponent } from './core/navbar/navbar.component';
+import { ConfirmDialog } from 'primeng/confirmdialog';
 
 @Component({
   standalone: true,
@@ -21,6 +22,7 @@ import { NavbarComponent } from './core/navbar/navbar.component';
     SidebarMenuComponent,
     Toast,
     NavbarComponent,
+    ConfirmDialog,
   ],
   selector: 's-app',
   templateUrl: './app.component.html',

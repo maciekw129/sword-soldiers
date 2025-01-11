@@ -1,3 +1,12 @@
-<div class="main-container">
-  <ui-button label="Create map" [routerLink]="createMapPath"/>
+<div class="maps-settings">
+  <div class="maps-settings__buttons">
+    <ui-button label="Create map" [routerLink]="createMapPath" />
+  </div>
+
+  <ui-table
+    [value]="tableValue$ | async"
+    [columns]="mapsTableColumns"
+    [actions]="mapsTableActions"
+    [isLoading]="isLoading()"
+  />
 </div>

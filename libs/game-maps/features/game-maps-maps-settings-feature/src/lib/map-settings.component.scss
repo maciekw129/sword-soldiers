@@ -1,0 +1,10 @@
+.maps-settings {
+  display: grid;
+  gap: var(--space-4);
+
+  &__buttons {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+  }
+}
