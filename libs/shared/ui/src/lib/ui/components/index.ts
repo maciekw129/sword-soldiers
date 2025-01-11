@@ -5,3 +5,5 @@ export { LinkComponent } from './link/link.component';
 export { SidebarMenuComponent } from './sidebar-menu/sidebar-menu.component';
 export { SidebarMenuItem } from './sidebar-menu/sidebar-menu.model';
 export { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
+export { TableComponent } from './table/table.component';
+export { TableColumn, TableAction } from './table/table.model';

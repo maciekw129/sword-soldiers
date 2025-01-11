@@ -1,0 +1,35 @@
+<p-table [value]="value()" [columns]="columns()" stripedRows [loading]="isLoading()">
+  <ng-template #header let-columns>
+    <tr>
+      @for (column of columns; track column.fieldName) {
+        <th>
+          {{ column.label }}
+        </th>
+      }
+
+      @if (actions().length) {
+        <th></th>
+      }
+    </tr>
+  </ng-template>
+
+  <ng-template #body let-rowData let-columns="columns">
+    <tr>
+      @for (column of columns; track column.fieldName) {
+        <td>
+        @if (rowData[column.fieldName]; as cellValue) {
+            {{ column?.transform ? (column.transform | invoke : rowData) : cellValue }}
+        } @else {
+          -
+        }
+        </td>
+      }
+
+      @for (action of actions(); track action.label) {
+        <td>
+          <p-button (onClick)="action.callback(rowData)" [icon]="action.icon" [pTooltip]="action.label" [rounded]="true" [text]="true" />
+        </td>
+      }
+    </tr>
+  </ng-template>
+</p-table>
