@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { apiProtected } from '../../../../data-access/src/lib';
+import { apiProtected } from '@data-access';
 import { Observable } from 'rxjs';
 import { CreateGameMapDto, GameMapDto } from './game-maps-http.model';
 

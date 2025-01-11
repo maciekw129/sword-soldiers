@@ -1,0 +1,35 @@
+<section uiBackLink class="create-map">
+  <h2 class="create-map__title">Create Map</h2>
+
+  <form class="create-map__form" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="create-map__fields">
+      <ui-input-text
+        formControlName="title"
+        label="Title"
+        placeholder="Enter map title"
+      />
+      <ui-textarea
+        formControlName="data"
+        label="Map JSON"
+        placeholder="Enter map JSON"
+      />
+      <ui-select-buttons
+        formControlName="difficulty"
+        [options]="options.difficulty"
+      />
+      <ui-input-number
+        formControlName="enemyRate"
+        label="Enemy rate"
+        placeholder="Enter map enemy rate"
+        [showButtons]="true"
+        [min]="1"
+        [max]="50"
+      />
+
+      <div class="create-map__buttons">
+        <ui-button label="Reset" design="outlined" (onClick)="onReset()"/>
+        <ui-button label="Submit" type="submit" [isLoading]="isLoading()" />
+      </div>
+    </div>
+  </form>
+</section>

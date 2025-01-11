@@ -35,10 +35,7 @@ import {
     SelectButtonsComponent,
   ],
 })
-export class UserProfileComponent
-  extends FormComponent<UserProfileControls>
-  implements OnInit
-{
+export class UserProfileComponent extends FormComponent<UserProfileControls> {
   private readonly userStore = inject(usersStore);
   private readonly usersHttpService = inject(UsersHttpService);
   private readonly messageService = inject(MessageService);
@@ -58,11 +55,6 @@ export class UserProfileComponent
         this.form.reset(this.user());
       }
     });
-  }
-
-  override ngOnInit() {
-    super.ngOnInit();
-    console.log(this.user());
   }
 
   protected buildForm(): FormGroup<UserProfileControls> {

@@ -19,7 +19,10 @@ import { MapsRoutes } from './maps-settings.model';
         data: {
           breadcrumb: 'Create',
         },
-        children: [],
+        loadComponent: () =>
+          import('./create-map/create-map.component').then(
+            (c) => c.CreateMapComponent
+          ),
       },
     ]),
   ],

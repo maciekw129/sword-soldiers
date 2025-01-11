@@ -1,0 +1,31 @@
+.create-map {
+  padding: var(--space-5) 0;
+
+  &__title {
+    width: 100%;
+    text-align: center;
+  }
+
+  &__form {
+    padding: var(--space-5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: var(--space-3);
+  }
+
+  &__fields {
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    row-gap: var(--space-4);
+  }
+
+  &__buttons {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    column-gap: var(--space-2);
+  }
+}

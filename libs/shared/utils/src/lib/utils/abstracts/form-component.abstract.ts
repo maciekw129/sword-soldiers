@@ -28,5 +28,11 @@ export abstract class FormComponent<
     this.onSubmitValidForm();
   }
 
+  public onReset(): void {
+    this.form.reset();
+    this.form.markAsPristine();
+    this.form.markAsUntouched();
+  }
+
   protected abstract onSubmitValidForm(): void;
 }
