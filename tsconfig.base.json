@@ -45,6 +45,7 @@
       "@utils/injection-hooks": [
         "libs/shared/utils/src/lib/utils/injection-hooks/index.ts"
       ],
+      "@utils/pipes": ["libs/shared/utils/src/lib/utils/pipes/index.ts"],
       "@utils/services": ["libs/shared/utils/src/lib/utils/services/index.ts"],
       "@utils/types": ["libs/shared/utils/src/lib/utils/types/index.ts"]
     }
