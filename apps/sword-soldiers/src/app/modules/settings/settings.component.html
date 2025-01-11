@@ -1,14 +1,5 @@
 <div class="main-container">
-  <p-tabs>
-    <p-tablist>
-      @for (tab of settingsTabs; track tab.link) {
-        <p-tab [value]="tab.link" [routerLink]="tab.link">
-          <i [class]="tab.icon"></i>
-          <span>{{ tab.text }}</span>
-        </p-tab>
-      }
-    </p-tablist>
-  </p-tabs>
+  <ui-navigation-tabs [basePath]="settingsPath" [tabs]="settingsTabs"/>
 
   <div class="padding-top-5">
     <router-outlet />

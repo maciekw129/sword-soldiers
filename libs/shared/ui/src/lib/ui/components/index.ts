@@ -7,3 +7,5 @@ export { SidebarMenuItem } from './sidebar-menu/sidebar-menu.model';
 export { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 export { TableComponent } from './table/table.component';
 export { TableColumn, TableAction } from './table/table.model';
+export { NavigationTabsComponent } from './navigation-tabs/navigation-tabs.component';
+export { NavigationTab } from './navigation-tabs/navigation-tabs.model';
