@@ -1,6 +1,7 @@
 import { Directive, HostListener, input } from '@angular/core';
 import { Subject } from 'rxjs';
 import { FormGroup } from '@angular/forms';
+import { markAllAsDirty } from '@utils/functions';
 
 @Directive({
   selector: 'form[formGroup]',
@@ -13,6 +14,8 @@ export class FormSubmitDirective {
 
   @HostListener('submit') listenOnSubmit() {
     this.formGroup()?.markAllAsTouched();
+    markAllAsDirty(this.formGroup());
+
     this.formSubmit$.next();
   }
 }

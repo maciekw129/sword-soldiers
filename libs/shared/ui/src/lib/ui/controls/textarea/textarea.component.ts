@@ -3,14 +3,13 @@ import { BasicFormControl } from '../abstracts/basic-form-control.abstract';
 import { Textarea } from 'primeng/textarea';
 import { ControlErrorDirective } from '../directives/control-errors.directive';
 import { ReactiveFormsModule } from '@angular/forms';
-import { FloatLabel } from 'primeng/floatlabel';
 
 @Component({
   selector: 'ui-textarea',
   standalone: true,
   templateUrl: 'textarea.component.html',
   styleUrl: 'textarea.component.scss',
-  imports: [Textarea, ReactiveFormsModule, ControlErrorDirective, FloatLabel],
+  imports: [Textarea, ReactiveFormsModule, ControlErrorDirective],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TextareaComponent<T> extends BasicFormControl<T> {

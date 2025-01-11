@@ -1,12 +1,13 @@
-<p-floatlabel variant="in">
+<div>
   <label [for]="controlId">{{ label() }}</label>
   <textarea
     pTextarea
     [formControl]="formControl"
     [id]="controlId"
+    [placeholder]="placeholder()"
     [rows]="rows()"
     [fluid]="fluid()"
     [autoResize]="autoResize()"
     [validationErrorsContent]="validationErrorsContent()"
   ></textarea>
-</p-floatlabel>
+</div>

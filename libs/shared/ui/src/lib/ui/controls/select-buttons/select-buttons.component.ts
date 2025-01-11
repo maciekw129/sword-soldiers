@@ -9,6 +9,7 @@ import { SelectButtonsOption } from './select-buttons.model';
   selector: 'ui-select-buttons',
   standalone: true,
   templateUrl: 'select-buttons.component.html',
+  styleUrl: 'select-buttons.component.scss',
   imports: [SelectButtonModule, ReactiveFormsModule, ControlErrorDirective],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

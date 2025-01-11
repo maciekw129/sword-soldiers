@@ -43,6 +43,7 @@ export class ControlErrorDirective implements OnInit {
 
   @HostListener('blur') listenOnBlur() {
     this.initializeErrorState$.next();
+    this.control.control.markAsDirty();
   }
 
   private initializeErrorState$ = new Subject<void>();

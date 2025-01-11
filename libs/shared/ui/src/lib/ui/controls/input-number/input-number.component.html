@@ -1,7 +1,9 @@
-<p-floatlabel variant="in">
+<div>
+  <label [for]="controlId">{{ label() }}</label>
   <p-inputNumber
     [inputId]="controlId"
     [formControl]="formControl"
+    [placeholder]="placeholder()"
     [min]="min()"
     [max]="max()"
     [prefix]="prefix()"
@@ -12,5 +14,4 @@
     [fluid]="fluid()"
     [validationErrorsContent]="validationErrorsContent()"
   />
-  <label [for]="controlId">{{ label() }}</label>
-</p-floatlabel>
+</div>

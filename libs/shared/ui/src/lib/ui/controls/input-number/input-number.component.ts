@@ -3,18 +3,12 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { ControlErrorDirective } from '../directives/control-errors.directive';
 import { ReactiveFormsModule } from '@angular/forms';
 import { InputNumberModule } from 'primeng/inputnumber';
-import { FloatLabel } from 'primeng/floatlabel';
 
 @Component({
   selector: 'ui-input-number',
   standalone: true,
   templateUrl: 'input-number.component.html',
-  imports: [
-    ControlErrorDirective,
-    ReactiveFormsModule,
-    InputNumberModule,
-    FloatLabel,
-  ],
+  imports: [ControlErrorDirective, ReactiveFormsModule, InputNumberModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputNumberComponent extends BasicFormControl<number> {
