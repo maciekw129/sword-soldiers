@@ -3,8 +3,20 @@
 $levels: 1 !default;
 $multiplier: 1 !default;
 
-@mixin initialize-spacing() {
+@mixin initialize-spacing {
   @for $i from 1 through $levels {
     #{"--space-" + $i}: #{($multiplier * $i) + 'px'};
+  }
+}
+
+@mixin generate-spacing-classes {
+  @for $i from 1 through $levels {
+    .padding-#{$i} {
+      padding: var(--space-#{$i});
+    }
+
+    .padding-top-#{$i} {
+      padding-top: var(--space-#{$i});
+    }
   }
 }
