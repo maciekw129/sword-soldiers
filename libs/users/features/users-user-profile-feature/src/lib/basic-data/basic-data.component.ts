@@ -1,20 +1,11 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  OnInit,
-  Signal,
   effect,
   inject,
+  Signal,
   signal,
 } from '@angular/core';
-import { InputTextComponent, SelectButtonsComponent } from '@ui/controls';
-import { FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { UserProfileControls } from './user-profile.model';
-import { ButtonComponent } from '@ui/components';
-import { FormComponent } from '@utils/abstracts';
-import { tap } from 'rxjs';
-import { MessageService } from 'primeng/api';
-import { CHARACTER_LABELS, GENDER_LABELS, OPTIONS } from '@users/domain';
 import {
   Character,
   Gender,
@@ -22,20 +13,33 @@ import {
   UsersHttpService,
   usersStore,
 } from '@users/data-access';
+import { MessageService } from 'primeng/api';
+import { CHARACTER_LABELS, GENDER_LABELS, OPTIONS } from '@users/domain';
+import { FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { BasicDataControls } from './basic-data.model';
+import { Observable, tap } from 'rxjs';
+import { FormComponent } from '@utils/abstracts';
+import { ButtonComponent } from '@ui/components';
+import {
+  FormSubmitDirective,
+  InputTextComponent,
+  SelectButtonsComponent,
+} from '@ui/controls';
 
 @Component({
   standalone: true,
-  templateUrl: './user-profile.component.html',
-  styleUrl: './user-profile.component.scss',
+  templateUrl: 'basic-data.component.html',
+  styleUrl: 'basic-data.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
-    InputTextComponent,
-    ReactiveFormsModule,
     ButtonComponent,
+    InputTextComponent,
+    FormSubmitDirective,
+    ReactiveFormsModule,
     SelectButtonsComponent,
   ],
 })
-export class UserProfileComponent extends FormComponent<UserProfileControls> {
+export class BasicDataComponent extends FormComponent<BasicDataControls> {
   private readonly userStore = inject(usersStore);
   private readonly usersHttpService = inject(UsersHttpService);
   private readonly messageService = inject(MessageService);
@@ -57,7 +61,7 @@ export class UserProfileComponent extends FormComponent<UserProfileControls> {
     });
   }
 
-  protected buildForm(): FormGroup<UserProfileControls> {
+  protected buildForm(): FormGroup<BasicDataControls> {
     return this.fb.group({
       name: this.fb.control(this.user()?.name ?? '', {
         validators: Validators.required,
@@ -73,25 +77,27 @@ export class UserProfileComponent extends FormComponent<UserProfileControls> {
 
   protected override onSubmitValidForm(): void {
     const userId = this.userStore.user()?.id;
-    this.isLoading.set(true);
 
     if (userId) {
-      this.usersHttpService
-        .updateUser$(userId, this.form.getRawValue())
-        .pipe(
-          tap((value) => {
-            this.userStore.setUser(value);
-            this.isEditMode.set(false);
-            this.isLoading.set(false);
-            this.messageService.add({
-              severity: 'success',
-              summary: 'Success',
-              detail: 'You successfully updated your profile!',
-            });
-          })
-        )
-        .subscribe();
+      this.isLoading.set(true);
+
+      this.getUpdateUserRequest$(userId).subscribe();
     }
+  }
+
+  private getUpdateUserRequest$(id: string): Observable<UserDto> {
+    return this.usersHttpService.updateUser$(id, this.form.getRawValue()).pipe(
+      tap((value) => {
+        this.userStore.setUser(value);
+        this.isEditMode.set(false);
+        this.isLoading.set(false);
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Success',
+          detail: 'You successfully updated your profile!',
+        });
+      })
+    );
   }
 
   public get user(): Signal<UserDto | null> {

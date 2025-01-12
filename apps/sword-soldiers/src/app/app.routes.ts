@@ -27,9 +27,9 @@ export const appRoutes: Route[] = [
           breadcrumb: 'User profile',
         },
         canActivate: [authGuardFn],
-        loadComponent: () =>
+        loadChildren: () =>
           import('@users/user-profile-feature').then(
-            (c) => c.UserProfileComponent
+            (m) => m.UserProfileRoutingModule
           ),
       },
       {

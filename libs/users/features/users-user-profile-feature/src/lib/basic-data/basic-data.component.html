@@ -1,0 +1,53 @@
+<section class="basic-data">
+  <form
+    [formGroup]="form"
+    (ngSubmit)="onSubmit()"
+    class="basic-data__form"
+  >
+    <div class="basic-data__fields">
+      <ui-input-text
+        label="Soldier name"
+        placeholder="Enter soldier name"
+        formControlName="name"
+        [readonly]="!isEditMode()"
+      />
+      <div>
+        <p>
+          Character: @if(!isEditMode()) { {{ genderLabels[user().gender] }}
+          {{ characterLabels[user().character] }}
+        }
+        </p>
+      </div>
+
+      @if(isEditMode()){
+        <div class="basic-data__character">
+          <ui-select-buttons
+            formControlName="gender"
+            [options]="options.gender"
+            [readonly]="!isEditMode()"
+          />
+          <ui-select-buttons
+            formControlName="character"
+            [options]="options.character"
+            [readonly]="!isEditMode()"
+          />
+        </div>
+      }
+
+      <div class="basic-data__buttons">
+        @if (isEditMode()) {
+          <div>
+            <ui-button
+              label="Cancel"
+              design="text"
+              (onClick)="isEditMode.set(false)"
+            />
+            <ui-button label="Submit" type="submit" [isLoading]="isLoading()" />
+          </div>
+        } @else {
+          <ui-button label="Edit" (onClick)="isEditMode.set(true)" />
+        }
+      </div>
+    </div>
+  </form>
+</section>
