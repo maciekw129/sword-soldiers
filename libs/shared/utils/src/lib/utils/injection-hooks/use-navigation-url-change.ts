@@ -7,7 +7,9 @@ export function useNavigationUrlChange$(): Observable<string[]> {
     filter(
       (event): event is NavigationEnd => event.type === EventType.NavigationEnd
     ),
-    map(({ url }) => url.split('/').filter(Boolean)),
+    map(({ urlAfterRedirects }) =>
+      urlAfterRedirects.split('/').filter(Boolean)
+    ),
     distinctUntilChanged()
   );
 }
