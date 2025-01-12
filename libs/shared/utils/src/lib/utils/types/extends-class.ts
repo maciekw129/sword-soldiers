@@ -1,1 +1,1 @@
-export type ExtendsClass<T> = new (...args: any[]) => T;
+export type ExtendsClass<T> = new (...args: unknown[]) => T;

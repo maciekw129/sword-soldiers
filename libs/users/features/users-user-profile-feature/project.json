@@ -2,7 +2,7 @@
   "name": "users-user-profile-feature",
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/users/features/users-user-profile-feature/src",
-  "prefix": "lib",
+  "prefix": "feature",
   "projectType": "library",
   "tags": ["feature"],
   "targets": {

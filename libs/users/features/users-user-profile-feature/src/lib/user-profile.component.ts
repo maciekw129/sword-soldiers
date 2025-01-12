@@ -4,6 +4,7 @@ import { USER_PROFILE_PATH, USER_PROFILE_TABS } from './user-profile.const';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
+  selector: 'feature-user-profile',
   standalone: true,
   templateUrl: './user-profile.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
