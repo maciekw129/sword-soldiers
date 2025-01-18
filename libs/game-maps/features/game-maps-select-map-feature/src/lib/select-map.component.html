@@ -1,0 +1,23 @@
+<section class="main-container">
+  <p-carousel
+    [value]="gameMaps() ?? []"
+    [numVisible]="1"
+    [numScroll]="1"
+    [circular]="false"
+  >
+    <ng-template let-map #item>
+      <div class="map-item">
+        <div class="map-item__content">
+          <h2 class="map-item__title">{{ map.title | uppercase }}</h2>
+          <p>{{ difficultyLabels | getLabel : map.difficulty }}</p>
+        </div>
+        <ui-button label="Start" routerLink="/play" />
+        <img
+          class="map-item__background"
+          alt="Map background"
+          src="https://img.freepik.com/premium-photo/pixel-art-dungeon-map-featuring-door-window_811279-24918.jpg?w=740"
+        />
+      </div>
+    </ng-template>
+  </p-carousel>
+</section>

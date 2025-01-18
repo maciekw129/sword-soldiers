@@ -23,6 +23,9 @@
       "@game-maps/maps-settings-feature": [
         "libs/game-maps/features/game-maps-maps-settings-feature/src/index.ts"
       ],
+      "@game-maps/select-map-feature": [
+        "libs/game-maps/features/game-maps-select-map-feature/src/index.ts"
+      ],
       "@ui/components": ["libs/shared/ui/src/lib/ui/components/index.ts"],
       "@ui/controls": ["libs/shared/ui/src/lib/ui/controls/index.ts"],
       "@ui/directives": ["libs/shared/ui/src/lib/ui/directives/index.ts"],

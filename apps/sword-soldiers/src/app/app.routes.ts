@@ -33,6 +33,17 @@ export const appRoutes: Route[] = [
           ),
       },
       {
+        path: 'select-map',
+        data: {
+          breadcrumb: 'Select map',
+        },
+        canActivate: [authGuardFn],
+        loadComponent: () =>
+          import('@game-maps/select-map-feature').then(
+            (c) => c.SelectMapComponent
+          ),
+      },
+      {
         path: 'play',
         data: {
           breadcrumb: 'Play',
