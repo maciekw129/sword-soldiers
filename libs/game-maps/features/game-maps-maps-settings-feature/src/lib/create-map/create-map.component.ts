@@ -48,18 +48,22 @@ export class CreateMapComponent extends FormComponent<CreateMapControls> {
 
   public isLoading = signal(false);
 
-  private readonly createMapRequest$ = defer(() =>
-    this.gameMapsHttpService.createGameMap$(this.form.getRawValue()).pipe(
-      tap(() =>
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Success',
-          detail: 'You successfully added new map!',
-        })
-      ),
-      finalize(() => this.isLoading.set(false))
-    )
-  );
+  private readonly createMapRequest$ = defer(() => {
+    const value = this.form.getRawValue();
+
+    return this.gameMapsHttpService
+      .createGameMap$({ ...value, data: JSON.parse(value.data) })
+      .pipe(
+        tap(() =>
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: 'You successfully added new map!',
+          })
+        ),
+        finalize(() => this.isLoading.set(false))
+      );
+  });
 
   protected buildForm() {
     return this.fb.group({

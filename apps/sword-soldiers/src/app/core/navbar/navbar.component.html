@@ -6,7 +6,7 @@
   <div class="navbar__buttons">
     @if (isAuthenticated$ | async) {
     <p>Hello {{ user()?.name }}, let's </p>
-    <ui-button label="Play!" routerLink="/play" />
+    <ui-button label="Play!" routerLink="/select-map" />
     } @else {
     <ui-button label="Login" design="link" (click)="redirectToLogin()" />
     }

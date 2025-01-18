@@ -1,4 +1,4 @@
-export interface GameMapDto<T = unknown> {
+export interface GameMapDto<T = object> {
   id: string;
   title: string;
   data: T;
@@ -6,14 +6,14 @@ export interface GameMapDto<T = unknown> {
   enemyRate: number;
 }
 
-export interface CreateGameMapDto<T = unknown> {
+export interface CreateGameMapDto<T = object> {
   title: string;
-  data: string;
+  data: T;
   difficulty: Difficulty;
   enemyRate: number;
 }
 
-export const enum Difficulty {
+export enum Difficulty {
   'EASY' = 1,
   'NORMAL',
   'HARD',
